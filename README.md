@@ -67,8 +67,3 @@ source venv/bin/activate
 <p>You are now ready to start the local development server!</p>
 <pre><code>python manage.py runserver
 </code></pre>
-
-<p align="center">The application will typically be available at:
-<a href="https://www.google.com/search?q=http://127.0.0.1:8000/"><strong>https://www.google.com/search?q=http://127.0.0.1:8000/</strong></a>
-</p>
-<p align="center">Happy coding! 🚀</p>
