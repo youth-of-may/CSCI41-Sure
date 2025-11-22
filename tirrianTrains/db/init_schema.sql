@@ -4,7 +4,7 @@ USE tiriantrainsdb;
 
 CREATE TABLE train (
     trainID INT NOT NULL PRIMARY KEY,
-    model VARCHAR(20) NOT NULL, 
+    model VARCHAR(20) NOT NULL,
     seriesType ENUM('S-Series', 'A-Series') NOT NULL DEFAULT 'S-Series',
     maxSpeed INT NOT NULL,
     numSeats INT NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE maintenance (
     maintenanceDate DATE NOT NULL,
     crewInCharge VARCHAR(50),
     tasks VARCHAR(255),
-    condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,
-    FOREIGN KEY (trainID) REFERENCES train(trainID),
+    `condition` ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,
+    FOREIGN KEY (trainID) REFERENCES train(trainID)
 );
 
 CREATE TABLE station (
@@ -40,7 +40,7 @@ CREATE TABLE route (
     destinationStationID INT NOT NULL,
     baseCost INT NOT NULL,
     isLocalRoute BOOLEAN NOT NULL DEFAULT 1,
-    estimatedDuration INT NOT NULL,  -- in minutes
+    estimatedDuration INT NOT NULL,
     FOREIGN KEY (originStationID) REFERENCES station(stationID),
     FOREIGN KEY (destinationStationID) REFERENCES station(stationID),
     CHECK (originStationID != destinationStationID),
@@ -54,7 +54,7 @@ CREATE TABLE scheduledTrip (
     tripDate DATE NOT NULL,
     departureTime TIME NOT NULL,
     arrivalTime TIME NOT NULL,
-    actualDuration INT
+    actualDuration INT,
     FOREIGN KEY (routeID) REFERENCES route(routeID),
     FOREIGN KEY (trainID) REFERENCES train(trainID)
 );
