@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from trainapp.services.customer_sql import create_customer
 
 """
