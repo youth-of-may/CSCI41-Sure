@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'tirrianTrains.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # for mysqlclient
-        'NAME': 'tirrianTrain',
+        'NAME': 'tirriantrainsdb',
         'USER': 'root',          
         'PASSWORD': '',
         'HOST': 'localhost',     
