@@ -27,6 +27,17 @@ CREATE TABLE maintenance (
     FOREIGN KEY (trainID) REFERENCES train(trainID),
 );
 """
+def list_trains():
+    """
+    Retrieves all trains
+    Returns trainID, model, and seriesType
+    """
+    sql = """
+    SELECT trainID, model, seriesType FROM train 
+    ORDER BY trainID ASC;
+    """
+    return db.execute(sql, [])
+
 #this is the logic for the train maintenance history view
 def get_train_details(train_id = None):
     """
@@ -44,7 +55,7 @@ def get_train_maintenance(train_id = None):
     Retrieves maintenance history of a train given its id
     """
     sql = """
-    SELECT maintenanceDate AS Date, crewInCharge AS 'Crew In Charge', tasks AS Tasks, condition AS 'Condition' FROM maintenance
+    SELECT maintenanceID, maintenanceDate, crewInCharge, tasks, train_condition FROM maintenance
     WHERE trainID = %s;
     """
     return db.execute(sql, [train_id])
