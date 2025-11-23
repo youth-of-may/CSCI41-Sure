@@ -18,3 +18,8 @@ def list_stations(local_only=None):
     if local_only is None:
         return db.execute('SELECT * FROM station ORDER BY stationID;')
     return db.execute('SELECT * FROM station WHERE isLocalStation=%s', [1 if local_only else 0])
+
+def get_station_name(stationID=None):
+    """Get a specific station name"""
+    result = db.execute('SELECT stationName FROM station WHERE stationID=%s', [stationID])
+    return result[0] if result else None
