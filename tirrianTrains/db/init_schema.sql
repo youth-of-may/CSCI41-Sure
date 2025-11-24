@@ -27,6 +27,9 @@ CREATE TABLE maintenance (
     train_condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,
     FOREIGN KEY (trainID) REFERENCES train(trainID)
 );
+/*
+important point to take note of: station names are unique
+*/
 
 CREATE TABLE station (
     stationID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
