@@ -35,6 +35,17 @@ VALUES
 (4, 5, 180, 0, 55),
 (1, 5, 300, 0, 90);
 
+INSERT INTO routePriceHistory (routeID, price, effectiveFrom, effectiveTo) VALUES
+(1, 100, '2025-01-01', '2025-02-01'),
+(1, 110, '2025-02-01', '2025-03-01'),
+(1, 120, '2025-03-01', '2025-04-01'),
+(1, 130, '2025-04-01', '2025-05-01'),
+(1, 150, '2025-05-01', '2025-06-01'),
+(2, 120, '2025-01-01', NULL),
+(3, 250, '2025-01-01', NULL),
+(4, 180, '2025-01-01', NULL),
+(5, 300, '2025-01-01', NULL);
+
 INSERT INTO scheduledTrip (routeID, trainID, tripDate, departureTime, arrivalTime, actualDuration)
 VALUES
 (1, 1, '2025-05-01', '08:00:00', '08:45:00', 45),
