@@ -21,8 +21,14 @@ def station_detail(request, destinationID):
 
 def route_price_history(request, routeID):
     ''' Show the price changes made on a specific route '''
+    return render(request, "trainapp/price/price_history.html",{'routePriceHistory':generate_price_history(routeID)})
+
+def change_route_price(request, routeID, newPrice):
+    ''' Change the base price of a route '''
     if request.method == 'POST':
-        # Will insert logic to allow price change later on
-        return(HttpResponse("<h1>Under Progress hehe</h1>"))
+        return HttpResponse("Work in Progress")
     else:
-        return render(request, "trainapp/price_history.html",{'routePriceHistory':generate_price_history(routeID)})
+        sql = '''
+        '''
+        #TODO
+        return render(request, "trainapp/price/price_change.html")
