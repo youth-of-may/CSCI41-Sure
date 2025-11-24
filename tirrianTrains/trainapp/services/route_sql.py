@@ -20,7 +20,7 @@ def get_destination_routes(destID):
     """
     Retrieve all the routes leading to a destination station using destID
     """
-    sql = """SELECT s1.stationName AS origin, s2.stationName AS destination, 
+    sql = """SELECT r.routeID, s1.stationName AS origin, s2.stationName AS destination, 
     IF(r.isLocalRoute = 1, 'Local', 'Intertown') AS routeType, estimatedDuration 
     FROM route r 
     JOIN station s1 

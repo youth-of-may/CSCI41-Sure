@@ -26,8 +26,3 @@ def route_price_history(request, routeID):
         return(HttpResponse("<h1>Under Progress hehe</h1>"))
     else:
         return render(request, "trainapp/price_history.html",{'routePriceHistory':generate_price_history(routeID)})
-
-# Unsure if I'll use this or not pa
-def total_price_history(request):
-    ''' Generate a full list of all changes to price across all stations '''
-    return render(request, "trainapp/stations/station_detail.html", {'routePriceHistory':full_price_history()})
