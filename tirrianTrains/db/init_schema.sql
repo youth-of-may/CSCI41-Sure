@@ -47,6 +47,15 @@ CREATE TABLE route (
     UNIQUE (originStationID, destinationStationID)
 );
 
+CREATE TABLE routePriceHistory (
+    priceHistoryID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    routeID INT NOT NULL,
+    price INT NOT NULL,
+    effectiveFrom DATE NOT NULL,
+    effectiveTo DATE DEFAULT NULL,
+    FOREIGN KEY (routeID) REFERENCES route(routeID)
+);
+
 CREATE TABLE scheduledTrip (
     tripScheduleID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     routeID INT NOT NULL,
