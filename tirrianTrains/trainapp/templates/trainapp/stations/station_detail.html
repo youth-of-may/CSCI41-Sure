@@ -15,7 +15,13 @@
     <ul>
         <!--Loop through the contents of routes-->
         {% for r in routes %}
-        {{r.origin}} {{r.destination}} {{r.routeType}} {{r.estimatedDuration}}
+        <li>
+            <span>
+                {{r.origin}} {{r.destination}} {{r.routeType}} {{r.estimatedDuration}}
+            </span>
+
+            <a href="{% url 'route_price_history' r.routeID %}">View Price History</a>
+        </li>
         {% endfor %}
     </ul>
 </div>

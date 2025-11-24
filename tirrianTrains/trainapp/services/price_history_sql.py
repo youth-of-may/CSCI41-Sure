@@ -1,31 +1,6 @@
 import trainapp._db as db
 from django.utils import timezone
 
-"""
-Guide:
-
-CREATE TABLE route (
-    routeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    originStationID INT NOT NULL,
-    destinationStationID INT NOT NULL,
-    baseCost INT NOT NULL,
-    isLocalRoute BOOLEAN NOT NULL DEFAULT 1,
-    estimatedDuration INT NOT NULL,
-    FOREIGN KEY (originStationID) REFERENCES station(stationID),
-    FOREIGN KEY (destinationStationID) REFERENCES station(stationID),
-    CHECK (originStationID != destinationStationID),
-    UNIQUE (originStationID, destinationStationID)
-);
-
-CREATE TABLE routePriceHistory (
-    priceHistoryID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    routeID INT NOT NULL,
-    price INT NOT NULL,
-    effectiveFrom DATE NOT NULL,
-    effectiveTo DATE DEFAULT NULL,
-    FOREIGN KEY (routeID) REFERENCES route(routeID)
-);
-"""
 # Unsure if I'll use this
 def full_price_history():
     """

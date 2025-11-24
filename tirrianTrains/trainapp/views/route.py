@@ -19,7 +19,7 @@ def station_detail(request, destinationID):
     }
     return render(request, "trainapp/stations/station_detail.html", context)
 
-def station_price_history(request, routeID):
+def route_price_history(request, routeID):
     ''' Show the price changes made on a specific route '''
     if request.method == 'POST':
         # Will insert logic to allow price change later on
