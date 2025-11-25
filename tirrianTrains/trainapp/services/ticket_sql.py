@@ -72,9 +72,11 @@ def ticketDetails(ticket_id=None):
     """
     return db.execute(sql, [ticket_id])
 
-def list_tickets():
+def list_ticket_dates():
     """
-    Simple helper function to generate all tickets
+    Generates all the dates with tickets
+    Used in admin dashboard
     """
-    sql = 'SELECT * FROM ticket'
+    
+    sql = "SELECT DISTINCT ticketDate FROM ticket ORDER BY ticketDate;"
     return db.execute(sql)

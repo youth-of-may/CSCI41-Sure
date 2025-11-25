@@ -11,12 +11,12 @@
 <div>
     <!--use the template found in booking to style this-->
     <h1>TICKET SALES</h1>
-    <form method="POST" action="{% url 'admin_ticket_sales' %}" class="max-w-md mx-auto bg-gray-100 p-4 rounded">
+    <form method="GET" action="{% url 'admin_ticket_sales' %}" class="max-w-md mx-auto bg-gray-100 p-4 rounded">
         {% csrf_token %}
 
         <label for="ticketDate" class="block mb-2 font-medium">Select Ticket Date:</label>
         <select name="ticketDate" id="ticketDate" class="w-full p-2 mb-4 border rounded">
-            {% for d in tickets %}
+            {% for d in ticketDates %}
                 <option value="{{ d.ticketDate }}">{{ d.ticketDate }}</option>
             {% endfor %}
         </select>

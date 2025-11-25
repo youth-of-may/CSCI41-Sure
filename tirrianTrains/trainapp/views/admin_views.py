@@ -2,13 +2,12 @@ from django.shortcuts import render, redirect
 from trainapp.services.maintenance_sql import *
 from trainapp.services.customer_sql import *
 from trainapp.services.ticket_sql import *
-from django.http import HttpResponse
 
 def admin_details(request):
     context = {
         'trains': list_trains(),
         'customers': list_customers(),
-        'tickets': list_tickets(),
+        'ticketDates': list_ticket_dates(),
     }
     return render(request, "trainapp/admin/admin_view.html", context)
 
@@ -20,4 +19,21 @@ def admin_travel_history(request, pk):
     return render(request, "trainapp/admin/travel_history.html", context)
 
 def admin_ticket_sales(request):
-    return HttpResponse("still working")
+    """
+    Show the sales from a specific date,
+    -- Is called by the form in admin_details
+    """
+    date = request.GET.get("ticketDate")
+    
+    if date:
+        sql = "SELECT * FROM ticket WHERE ticketDate = %s"
+        tickets = db.execute(sql, [date])
+    else:
+        tickets = []
+    
+    context = {
+        "tickets": tickets,
+        "date": date,    
+    }
+
+    return render(request, "trainapp/admin/ticket_sales.html", context)
