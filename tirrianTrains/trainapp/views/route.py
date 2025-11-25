@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from trainapp.services.station_sql import *
 from trainapp.services.route_sql import *
 from trainapp.services.price_history_sql import *
@@ -18,6 +18,14 @@ def station_detail(request, destinationID):
         'routes': get_destination_routes(destinationID),
     }
     return render(request, "trainapp/stations/station_detail.html", context)
+
+def stations_add(request):
+    if request.method == 'POST':
+        create_station(request.POST['stationName'], request.POST['isLocalStation'])
+        return redirect('station_list')
+        
+    return render(request,"trainapp/stations/station_create.html")
+
 
 def route_price_history(request, routeID):
     ''' Show the price changes made on a specific route '''

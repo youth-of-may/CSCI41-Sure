@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Customer Information
+{% endblock %}
+
+{% block content %}
+<h1>New Maintenance</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="train">Train</label>
+            <select id="train" name="train" required>
+                <option value="">Select</option>
+                {% for t in trains %}
+                <option value="{{t.trainID}}">Model {{t.model}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="maintenanceDate">Maintenance Date</label>
+            <input type="date" id="maintenanceDate" name="maintenanceDate" required>
+        </div>
+        <div>
+            <label for="crew">Crew In Charge</label>
+            <input type="text" id="crw" name="crew" required>
+        </div>
+        <div>
+            <label for="task">Tasks</label>
+            <input type="text" id="task" name="task" required>
+        </div>
+        <div>
+            <label for="train_condition">Train Condition</label>
+            <select id="train_condition" name="train_condition" required>
+                <option value="">Select</option>
+                <option value="0">Excellent</option>
+                <option value="1">Very Good</option>
+                <option value="2">Satisfactory</option>
+                <option value="3">Poor</option>
+            </select>
+        </div>
+        
+        <button type="submit">Add Maintenance</button>
+    </form>
+{% endblock %}
