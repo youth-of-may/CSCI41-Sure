@@ -23,3 +23,13 @@ def get_station_name(stationID=None):
     """Get a specific station name"""
     result = db.execute('SELECT stationName FROM station WHERE stationID=%s', [stationID])
     return result[0] if result else None
+
+def create_station(stationName, isLocal):
+    """
+    Function used to create a new station
+    """
+    sql = '''
+    INSERT INTO station(stationName, isLocalStation)
+    VALUES (%s, %s);
+    '''
+    return db.execute_return_lastrowid(sql, [stationName, isLocal])
