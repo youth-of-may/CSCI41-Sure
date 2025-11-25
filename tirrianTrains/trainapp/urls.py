@@ -20,4 +20,5 @@ urlpatterns = [
     path('routes/<int:routeID>/price_change', change_route_price, name="change_route_price"),
     path('tirian/admin', admin_details, name="tirian_admin"),
     path('customer/<int:pk>/history', admin_travel_history, name="travel_history"),
+    path('ticket_sales/', admin_ticket_sales, name="admin_ticket_sales")
 ]

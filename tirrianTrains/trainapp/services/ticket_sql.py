@@ -71,3 +71,10 @@ def ticketDetails(ticket_id=None):
     ORDER BY st.tripDate, st.departureTime;
     """
     return db.execute(sql, [ticket_id])
+
+def list_tickets():
+    """
+    Simple helper function to generate all tickets
+    """
+    sql = 'SELECT * FROM ticket'
+    return db.execute(sql)
