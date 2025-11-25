@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Customer Information
+{% endblock %}
+
+{% block content %}
+<h1>New Station Registration</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div>
+            <label for="stationName">Station Name</label>
+            <input type="text" id="stationName" name="stationName" required>
+        </div>
+        <div>
+            <label for="isLocalStation">Station Type</label>
+            <select id="isLocalStation" name="isLocalStation" required>
+                <option value="">Select</option>
+                <option value="1">Local</option>
+                <option value="0">Intertown</option>
+            </select>
+        </div>
+        
+        <button type="submit">Create Station</button>
+    </form>
+{% endblock %}
