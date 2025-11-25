@@ -50,7 +50,7 @@ def get_train_details(train_id = None):
     """
     return db.execute(sql, [train_id])
 
-def get_train_maintenance(train_id = None):
+def get_train_maintenance(train_id = None, ):
     """
     Retrieves maintenance history of a train given its id
     """
@@ -59,3 +59,17 @@ def get_train_maintenance(train_id = None):
     WHERE trainID = %s;
     """
     return db.execute(sql, [train_id])
+"""
+maintenanceDate DATE NOT NULL,
+    crewInCharge VARCHAR(50),
+    tasks VARCHAR(255),
+    condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,"""
+def add_maintenance(trainID, maintenanceDate, crew, task, condition):
+    """
+    Function used to create a new maintenance task
+    """
+    sql = '''
+    INSERT INTO maintenance(trainID, maintenanceDate, crewInCharge, tasks, train_condition)
+    VALUES (%s, %s, %s, %s, %s);
+    '''
+    return db.execute_return_lastrowid(sql, [trainID, maintenanceDate, crew, task, condition])
