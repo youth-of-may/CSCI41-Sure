@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tirian Trains
+{% endblock %}
+
+{% block content %}
+<!-- Reorganize or design however you want this is just a test :) -->
+
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+    <h1 class="text-2xl text-white font-semibold text-center">Tirian Trains</h1>
+</div>
+<div class="bg-[#000272] flex h-24 items-center justify-center px-1 m-6">
+    <h2 class="text-2xl text-white font-semibold text-center">Pages</h2>
+</div>
+<div class="flex items-center justify-center px-1 m-6">
+    <a href="{% url 'customer_creation' %}" class="bg-blue-500 text-white text-lg rounded-md px-6 py-4 hover:bg-blue-600 m-1">Register</a>
+    <a href="{% url 'booking_page' %}" class="bg-blue-500 text-white text-lg rounded-md px-6 py-4 hover:bg-blue-600 m-1">Booking</a>
+    <a href="{% url 'station_list' %}" class="bg-blue-500 text-white text-lg rounded-md px-6 py-4 hover:bg-blue-600 m-1">Stations</a>
+    <a href="{% url 'schedule_list' %}" class="bg-blue-500 text-white text-lg rounded-md px-6 py-4 hover:bg-blue-600 m-1">Schedules</a>
+    <a href="{% url 'tirian_admin' %}" class="bg-blue-500 text-white text-lg rounded-md px-6 py-4 hover:bg-blue-600 m-1">Admin</a>
+</div>
+
+
+
+{% endblock %}

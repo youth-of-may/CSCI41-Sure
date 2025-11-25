@@ -5,8 +5,10 @@ from trainapp.views.maintenance import *
 from trainapp.views.trips import *
 from trainapp.views.route import *
 from trainapp.views.admin_views import *
+from trainapp.views.homepage import homepage
 
 urlpatterns = [
+    path('homepage/', homepage, name="homepage"),
     path('register/', create_customer_view, name='customer_creation'),
     path('booking/', booking_page, name='booking_page'),
     path('maintenance/add', maintenance_add, name="maintenance_add"),
