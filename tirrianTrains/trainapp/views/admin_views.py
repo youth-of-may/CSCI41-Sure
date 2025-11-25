@@ -24,12 +24,15 @@ def admin_ticket_sales(request):
     -- Is called by the form in admin_details
     """
     date = request.GET.get("ticketDate")
+    print("showing date: ", date)
     
     if date:
         sql = "SELECT * FROM ticket WHERE ticketDate = %s"
         tickets = db.execute(sql, [date])
     else:
         tickets = []
+    
+    print(tickets)
     
     context = {
         "tickets": tickets,
