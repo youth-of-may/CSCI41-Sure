@@ -35,24 +35,23 @@ def add_initial_price(routeID, price):
 
 def update_route_price(routeID, newPrice):
     """
-    Close the previous price record first and then insert a new record
+    Close the previous price record and insert a new one
     """
-    
-    now = timezone.now()
+    now = timezone.now().date()
+
     # Close previous record
     close_sql = '''
-    UPDATE routePriceHistory
-    SET effectiveTo = %s
-    WHERE routeID = %s AND effectiveTo is NULL
+        UPDATE routePriceHistory
+        SET effectiveTo = %s
+        WHERE routeID = %s AND effectiveTo IS NULL;
     '''
-    
     db.execute(close_sql, [now, routeID])
-    
-    # Insert new one
+
+    # Insert new price
     insert_sql = '''
-    INSERT INTO routePriceHistory (routeID, price, effectiveFrom)
-    VALUES (%s, %s, %s);
+        INSERT INTO routePriceHistory (routeID, price, effectiveFrom)
+        VALUES (%s, %s, %s);
     '''
-    
     db.execute(insert_sql, [routeID, newPrice, now])
-    return("Price changed")
+
+    return "Price changed"

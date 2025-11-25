@@ -31,12 +31,18 @@ def route_price_history(request, routeID):
     ''' Show the price changes made on a specific route '''
     return render(request, "trainapp/price/price_history.html",{'routePriceHistory':generate_price_history(routeID)})
 
-def change_route_price(request, routeID, newPrice):
+def change_route_price(request, routeID):
     ''' Change the base price of a route '''
     if request.method == 'POST':
-        return HttpResponse("Work in Progress")
+        new_price = request.POST.get("price")
+        
+        # Basic input cleaning
+        if not new_price or not new_price.isdigit():
+            return HttpResponse("Invalid Price")
+        
+        new_price = int(new_price)
+        
+        update_route_price(routeID, new_price)
+        return redirect('route_price_history', routeID=routeID)
     else:
-        sql = '''
-        '''
-        #TODO
         return render(request, "trainapp/price/price_change.html")

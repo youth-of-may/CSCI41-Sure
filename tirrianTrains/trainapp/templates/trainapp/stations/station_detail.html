@@ -21,6 +21,7 @@
             </span>
 
             <a href="{% url 'route_price_history' r.routeID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">View Price History</a>
+            <a href="{% url 'change_route_price' r.routeID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">Change Price</a>
         </li>
         {% endfor %}
     </ul>
