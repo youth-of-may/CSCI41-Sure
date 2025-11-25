@@ -18,4 +18,5 @@ urlpatterns = [
     path('stations/<int:destinationID>/details', station_detail, name="station_detail"),
     path('routes/<int:routeID>/price_history', route_price_history, name="route_price_history"),
     path('tirian/admin', admin_details, name="tirian_admin"),
+    path('customer/<int:pk>/history', admin_travel_history, name="travel_history"),
 ]

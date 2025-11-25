@@ -35,8 +35,8 @@ def get_customer(customerID=1):
     Retrieves a customer given a customerID
     Returns all columns of customer
     """
-    return db.execute('SELECT * FROM customer WHERE customerID=%s;', [customerID])
-
+    result = db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer WHERE customerID=%s;", [customerID])
+    return result[0]
 def list_customers():
     """
     Retrieves the list of customers

@@ -28,7 +28,7 @@
     <ul>
     {% for c in customers %}
     <li>{{c.customerID}} {{c.name}}
-    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="">
+    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'travel_history' c.customerID %}">
         View
     </a>    
     </li>
