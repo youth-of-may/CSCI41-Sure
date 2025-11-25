@@ -55,7 +55,7 @@ def get_train_maintenance(train_id = None, ):
     Retrieves maintenance history of a train given its id
     """
     sql = """
-    SELECT maintenanceID, maintenanceDate, crewInCharge, tasks, train_condition FROM maintenance
+    SELECT maintenanceID, maintenanceDate, crewInCharge, tasks, 'condition' FROM maintenance
     WHERE trainID = %s;
     """
     return db.execute(sql, [train_id])
