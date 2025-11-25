@@ -41,7 +41,7 @@ def list_customers():
     """
     Retrieves the list of customers
     """
-    return db.execute('SELECT * FROM customer ORDER BY customerID;', [])
+    return db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer ORDER BY customerID;", [])
 
 def generate_travel_history(customerID=1):
     """
