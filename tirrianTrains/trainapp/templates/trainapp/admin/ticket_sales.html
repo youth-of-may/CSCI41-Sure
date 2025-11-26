@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Sales Report for {{ date }}
+{% endblock %}
+
+{% block content %}
+    {% if tickets %}
+        <table>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Customer</th>
+                <th>Total Cost</th>
+                <th>Details</th> <!-- I can remove this if not yet implemented -->
+            </tr>
+            {% for t in tickets %}
+                <tr>
+                    <td>{{ t.ticketID }}</td>
+                    <td>{{ t.customerID }}</td>
+                    <td>{{ t.totalCost }}</td>
+                    <td>View</td> <!-- I can remove this if not yet implemented -->
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No tickets sold on this date.</p>
+    {% endif %}
+{% endblock %}

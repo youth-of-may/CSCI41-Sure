@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Price History
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+    <h1 class="text-2xl text-white font-semibold text-center">Price History</h1>
+</div>
+
+<!-- Use similar design to that shown in List of Available Trips wireframe -->
+<div>
+    <ol>
+    {% for row in routePriceHistory %}
+        <li>{{row.price}} {{row.effectiveFrom}} {{row.effectiveTo}}</li>
+    {% endfor %}
+    </ol>
+</div>
+{% endblock %}

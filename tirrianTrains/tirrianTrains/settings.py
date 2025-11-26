@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'trainapp',
 ]
 
 MIDDLEWARE = [
@@ -57,10 +58,11 @@ ROOT_URLCONF = 'tirrianTrains.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'tirrianTrains.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # for mysqlclient
-        'NAME': 'tirrianTrain',
+        'NAME': 'tiriantrainsdb',
         'USER': 'root',          
         'PASSWORD': '',
         'HOST': 'localhost',     

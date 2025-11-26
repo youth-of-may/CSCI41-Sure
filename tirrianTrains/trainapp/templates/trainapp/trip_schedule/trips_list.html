@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+        <h1 class="text-2xl text-white font-semibold text-center">Schedules</h1>
+</div>
+<div>
+    <!--use the template found in booking to style this-->
+    <ul>
+    {% for s in schedule %}   
+    <li>
+    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'schedule_detail' s.tripDate %}">
+    View
+    </a>
+        {{s.tripDate}} {{s.tripNumber}}
+     
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+        <h1 class="text-2xl text-white font-semibold text-center">Routes</h1>
+</div>
+<div>
+    <!--use the template found in booking to style this-->
+    <h1 class="text-2xl font-semibold text-center">Routes to {{station_name.stationName}}</h1>
+    
+    <ul>
+        <!--Loop through the contents of routes-->
+        {% for r in routes %}
+        <li>
+            <span>
+                {{r.origin}} {{r.destination}} {{r.routeType}} {{r.estimatedDuration}}
+            </span>
+
+            <a href="{% url 'route_price_history' r.routeID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">View Price History</a>
+            <a href="{% url 'change_route_price' r.routeID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">Change Price</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

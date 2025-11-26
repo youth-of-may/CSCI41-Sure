@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+        <h1 class="text-2xl text-white font-semibold text-center">Schedules</h1>
+</div>
+<div>
+    <!--use the template found in booking to style this-->
+    <!--loop through the stuff inside local and intertown-->
+    <ul>
+    {% for l in local %}   
+    
+    {% endfor %}
+    {% for i in intertown %}   
+    
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

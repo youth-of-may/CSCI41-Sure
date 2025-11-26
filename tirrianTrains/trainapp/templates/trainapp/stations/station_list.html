@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+        <h1 class="text-2xl text-white font-semibold text-center">Stations</h1>
+</div>
+<div>
+    <!--use the template found in booking to style this-->
+    <ul>
+    <h1 class="text-xl">Local Routes</h1>
+    {% for l in local_station %}
+    <li>
+    {{l.stationName}}
+    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' l.stationID %}">
+        View
+    </a>    
+    </li>
+    {% endfor %}
+    </ul>
+    <ul>
+    <h1 class="text-xl"> Intertown Routes</h1>
+    {% for i in intertown_station %}
+    <li>
+    {{i.stationName}}
+    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' i.stationID %}">
+        View
+    </a>    
+    </li>
+    {% endfor %}
+    </ul>
+    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_create' %}">
+        Add Station
+    </a>    
+</div>
+{% endblock %}
