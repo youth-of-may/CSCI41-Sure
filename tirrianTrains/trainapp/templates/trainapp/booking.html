@@ -6,109 +6,159 @@ Booking
 
 {% block content %}
 <!-- This is just dummy content I will use for testing, will update with the actual template later -->
+<!-- sorry for editing this -->
  
-<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
-        <h1 class="text-2xl text-white font-semibold text-center">Booking</h1>
-</div>
-
-    <div class="bg-[#000272] flex h-28 items-center justify-center px-1 m-6">
-        <h2 class="text-2xl text-white font-semibold text-center">Local Trips</h2>
+    <div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+        <h1 class="text-3xl text-white font-bold text-center">Booking</h1>
     </div>
 
-    <div class="p-4">
-        <table class="w-full border-collapse border-gray-200 border-2">
-            <thead>
-                <tr class="bg-[#5A698E] text-white text-sm">
-                    <th class="px-4 py-2 text-left">Date</th>
-                    <th class="px-4 py-2 text-left">Origin</th>
-                    <th class="px-4 py-2 text-left">Destination</th>
-                    <th class="px-4 py-2 text-left">Departure</th>
-                    <th class="px-4 py-2 text-left">Arrival</th>
-                    <th class="px-4 py-2 text-left">Cost</th>
-                    <th class="px-4 py-2 text-left">Trips</th>
-                </tr>
-            </thead>
+    <div class="max-w-7xl mx-auto p-6 space-y-8">
+      <!-- Local -->
+      <div>
+        <h2 class="bg-[#000272] text-white font-semibold text-center py-4 text-xl">
+          Local Trips
+        </h2>
 
-            <tbody class="text-sm">
-                <tr class="border-b-2 border-gray-200">
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">
-                        <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
-                            Select
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+      <!-- header -->
+        <div class="grid grid-cols-7 bg-[#5A698E] text-white font-semibold text-center py-2 px-4 text-sm">
+          <div>Date</div>
+          <div>Origin</div>
+          <div>Destination</div>
+          <div>Departure</div>
+          <div>Arrival</div>
+          <div>Cost</div>
+          <div>Trips</div>
+        </div>
 
-    <div class="bg-[#000272] flex h-28 items-center justify-center px-1 m-6">
-        <h2 class="text-2xl text-white font-semibold text-center">Inter-Town Trips</h2>
-    </div>
+        <!-- body -->
+        <ul class=" bg-white divide-y divide-[#EFECE3]">
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a 
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a 
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+        </ul>
+      </div>
 
-    <div class="p-4">
-        <table class="w-full border-collapse border-gray-200 border-2">
-            <thead>
-                <tr class="bg-[#5A698E] text-white text-sm">
-                    <th class="px-4 py-2 text-left">Date</th>
-                    <th class="px-4 py-2 text-left">Origin</th>
-                    <th class="px-4 py-2 text-left">Destination</th>
-                    <th class="px-4 py-2 text-left">Departure</th>
-                    <th class="px-4 py-2 text-left">Arrival</th>
-                    <th class="px-4 py-2 text-left">Cost</th>
-                    <th class="px-4 py-2 text-left">Trips</th>
-                </tr>
-            </thead>
+      <!-- inter town -->
+      <div>
+        <h2 class="bg-[#000272] text-white font-semibold text-center py-4 text-xl">
+          Inter-Town Trips
+        </h2>
 
-            <tbody class="text-sm">
-                <tr class="border-b-2 border-gray-200">
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">
-                        <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
-                            Select
-                        </button>
-                    </td>
-                </tr>
-                <tr class="border-b-2 border-gray-200">
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">
-                        <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
-                            Select
-                        </button>
-                    </td>
-                </tr>
-                <tr class="border-b-2 border-gray-200">
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">Test</td>
-                    <td class="px-4 py-3">
-                        <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
-                            Select
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+      <!-- header -->
+        <div class="grid grid-cols-7 bg-[#5A698E] text-white font-semibold text-center py-2 px-4 text-sm">
+          <div>Date</div>
+          <div>Origin</div>
+          <div>Destination</div>
+          <div>Departure</div>
+          <div>Arrival</div>
+          <div>Cost</div>
+          <div>Trips</div>
+        </div>
 
-    <div class="bg-[#5071A8] flex h-16">
+        <!-- body -->
+        <ul class=" bg-white divide-y divide-[#EFECE3]">
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a  
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a  
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a  
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a  
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a  
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+          <li class="grid grid-cols-7 items-center px-4 py-3 text-center">
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <ul> test </ul>
+              <a 
+                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+              >
+                  View
+              </a>
+          </li>
+        </ul>
+      </div>
     </div>
 {% endblock %}
