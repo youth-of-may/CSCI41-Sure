@@ -16,6 +16,13 @@ CREATE TABLE route (
 );
 
 """
+def returnStations(routeID = None):
+    sql = """SELECT s1.stationName 'origin', s2.stationName 'destination' FROM route 
+    JOIN station s1 ON s1.stationID = route.originStationID 
+    JOIN station s2 ON s2.stationID = route.destinationStationID
+    WHERE route.routeID = %s;
+    """
+    return db.execute(sql, [routeID])
 def get_destination_routes(destID):
     """
     Retrieve all the routes leading to a destination station using destID

@@ -40,3 +40,13 @@ def admin_ticket_sales(request):
     }
 
     return render(request, "trainapp/admin/ticket_sales.html", context)
+
+def customer_ticket_trips(request, pk):
+    """Show trip and customer details given ticketID"""
+
+    context= {
+        'ticketNum': pk,
+        'customer': ticketCustDetails(ticket_id=pk),
+        'trips': ticketTripDetails(ticket_id=pk),
+    }
+    return render(request, "trainapp/admin/customer_ticket.html", context)

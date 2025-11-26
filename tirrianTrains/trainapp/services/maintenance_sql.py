@@ -63,7 +63,7 @@ def get_train_maintenance(train_id = None, ):
 maintenanceDate DATE NOT NULL,
     crewInCharge VARCHAR(50),
     tasks VARCHAR(255),
-    condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,"""
+    train_condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,"""
 def add_maintenance(trainID, maintenanceDate, crew, task, condition):
     """
     Function used to create a new maintenance task
