@@ -10,25 +10,25 @@ Customer Information
 </div>
 
 <div class=" scale-130 pt-15 max-w-7xl mx-auto p-6 space-y-8">
-    <div class="w-full p-2 mb-4 border bg-gray-200 rounded text-center justify-center">
+    <div class="w-full p-2 mb-4 bg-white text-center justify-center">
         <form method="POST">
             {% csrf_token %}
             
             <div class="pt-2 pb-5">
                 <label for="givenName" class="mb-2 font-medium">First Name:</label>
-                <input type="text" id="givenName" name="givenName" class="w-sm p-2 mb-4s bg-gray-300" required>
+                <input type="text" id="givenName" name="givenName" class="w-sm p-2 mb-4s bg-gray-200" required>
 
                 <label for="middleInitial" class="mb-2 font-medium">Middle Initial:</label>
-                <input type="text" id="middleInitial" name="middleInitial" maxlength="1" class="w-auto p-2 mb-4s bg-gray-300">
+                <input type="text" id="middleInitial" name="middleInitial" maxlength="1" class="w-auto p-2 mb-4s bg-gray-200">
 
                 <label for="lastName" class="mb-2 font-medium">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" class="w-xs p-2 mb-4s bg-gray-300" required>
+                <input type="text" id="lastName" name="lastName" class="w-xs p-2 mb-4s bg-gray-200" required>
 
             </div>
             
             <div>
                 <label for="gender" class="mb-2 font-medium">Gender:</label>
-                <select id="gender" name="gender" class="w-md p-2 mb-4 bg-gray-300" required>
+                <select id="gender" name="gender" class="w-md p-2 mb-4 bg-gray-200" required>
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -36,10 +36,10 @@ Customer Information
                 </select>
 
                 <label for="birthDate" class="mb-2 font-medium">Birth Date:</label>
-                <input type="date" id="birthDate" name="birthDate" class="w-md p-2 mb-4s bg-gray-300" required>
+                <input type="date" id="birthDate" name="birthDate" class="w-md p-2 mb-4s bg-gray-200" required>
             </div>
             
-            <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" type="submit">Submit Information</button>
+            <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 item-center" type="submit">Submit Information</button>
         </form>
     </div>
 </div>
