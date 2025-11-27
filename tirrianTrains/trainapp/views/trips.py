@@ -10,6 +10,7 @@ def schedules_list(request):
 
 def schedule_detail(request, trip_date):
     context = {
+        'date':get_raw_date(trip_date),
         'local': list_local_intertown(True, trip_date),
         'intertown': list_local_intertown(False, trip_date)
     }

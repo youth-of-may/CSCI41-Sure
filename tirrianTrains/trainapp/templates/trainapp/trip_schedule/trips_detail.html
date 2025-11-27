@@ -6,10 +6,8 @@
 
 {% block content %}
 <div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
-        <h1 class="text-2xl text-white font-semibold text-center">{{local.tripDate}}</h1>
+        <h1 class="text-2xl text-white font-semibold text-center">{% for d in date %} {{d.tripDate}} {% endfor %}</h1>
 </div>
-{{local}}
-{{intertown}}
 <div>
     <!--use the template found in booking to style this-->
     <!--loop through the stuff inside local and intertown-->
@@ -58,7 +56,7 @@
         <ul class=" bg-white divide-y divide-[#EFECE3]">
         {% for i in intertown %}
             <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-                <span>{{i.i.trainID}} </span>
+                <span>{{i.trainID}} </span>
                 <span>{{i.Origin}} </span>
                 <span>{{i.Destination}} </span>
                 <span>{{i.Departure}} </span>

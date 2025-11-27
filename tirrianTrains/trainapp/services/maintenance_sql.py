@@ -23,7 +23,7 @@ CREATE TABLE maintenance (
     maintenanceDate DATE NOT NULL,
     crewInCharge VARCHAR(50),
     tasks VARCHAR(255),
-    condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,
+    train_condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,
     FOREIGN KEY (trainID) REFERENCES train(trainID),
 );
 """
@@ -55,7 +55,7 @@ def get_train_maintenance(train_id = None, ):
     Retrieves maintenance history of a train given its id
     """
     sql = """
-    SELECT maintenanceID, maintenanceDate, crewInCharge, tasks, 'condition' FROM maintenance
+    SELECT maintenanceID, maintenanceDate, crewInCharge, tasks, train_condition FROM maintenance
     WHERE trainID = %s;
     """
     return db.execute(sql, [train_id])
@@ -64,7 +64,7 @@ maintenanceDate DATE NOT NULL,
     crewInCharge VARCHAR(50),
     tasks VARCHAR(255),
     train_condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,"""
-def add_maintenance(trainID, maintenanceDate, crew, task, condition):
+def add_maintenance(trainID, maintenanceDate, crew, task, train_condition):
     """
     Function used to create a new maintenance task
     """
@@ -72,4 +72,4 @@ def add_maintenance(trainID, maintenanceDate, crew, task, condition):
     INSERT INTO maintenance(trainID, maintenanceDate, crewInCharge, tasks, train_condition)
     VALUES (%s, %s, %s, %s, %s);
     '''
-    return db.execute_return_lastrowid(sql, [trainID, maintenanceDate, crew, task, condition])
+    return db.execute_return_lastrowid(sql, [trainID, maintenanceDate, crew, task, train_condition])

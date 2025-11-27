@@ -41,6 +41,13 @@ def list_trips_per_date():
     sql ="SELECT tripDate, COUNT(tripScheduleID) AS tripNumber FROM scheduledTrip GROUP BY tripDate ORDER BY tripDate ASC;"
     return db.execute(sql, None)
 
+def get_raw_date(trip_date=None):
+    """
+    Get raw date value
+    """
+    sql ="SELECT tripDate FROM scheduledTrip WHERE tripDate=%s LIMIT 1;"
+    return db.execute(sql, [trip_date])
+
 #use this for the date specific trips
 def list_local_intertown(isLocal=True, trip_date=None):
     """
@@ -48,8 +55,8 @@ def list_local_intertown(isLocal=True, trip_date=None):
     Returns train number, origin station, destination, departure time, arrival time, and the actual duration of the trip
     """
     sql = '''
-    SELECT trip.trainID AS 'Train#', s1.stationName AS 'Origin', s2.stationName AS 'Destination', 
-    trip.departureTime 'Departure', trip.arrivalTime 'Arrival', trip.actualDuration 
+    SELECT trip.trainID AS 'trainID', s1.stationName AS 'Origin', s2.stationName AS 'Destination', 
+    trip.departureTime 'Departure', trip.arrivalTime 'Arrival', trip.actualDuration, r.baseCost
     FROM route r 
     JOIN scheduledTrip trip
     ON trip.routeID = r.routeID
