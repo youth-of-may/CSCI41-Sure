@@ -6,44 +6,45 @@
 
 {% block content %}
 <div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
-        <h1 class="text-2xl text-white font-semibold text-center">Stations & Routes</h1>
+        <h1 class="text-2xl text-white font-semibold text-center">Stations</h1>
 </div>
-<div class="max-w-7xl mx-auto p-6 space-y-8">
-<div>
+<div class="max-w-7xl mx-auto p-6 space-y-8 space-x-2 grid grid-cols-2">
     <!--use the template found in booking to style this-->
     <div class="pb-10">
         <h2 class="bg-[#000272] text-white font-semibold text-center py-4 text-xl">
           Local Stations
         </h2>
-    <ul class=" bg-white divide-y divide-[#EFECE3]">
-    {% for l in local_station %}
-        <li class="divide-x divide-[#EFECE3] grid grid-cols-2 items-center px-4 py-3 text-center">
-        {{l.stationName}}
-        <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' l.stationID %}">
-            View Routes
-        </a>    
-        </li>
-    {% endfor %}
-    </ul>
+        <ul class=" bg-white divide-y divide-[#EFECE3]">
+        {% for l in local_station %}
+            <li class="divide-x divide-[#EFECE3] grid grid-cols-2 items-center px-4 py-3 text-center">
+            {{l.stationName}}
+            <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' l.stationID %}">
+                View Routes
+            </a>    
+            </li>
+        {% endfor %}
+        </ul>
     </div>
 
     <div>
         <h2 class="bg-[#000272] text-white font-semibold text-center py-4 text-xl">
           Intertown Stations
         </h2>
-    <ul class=" bg-white divide-y divide-[#EFECE3]">
-    {% for i in intertown_station %}
-        <li class="divide-x divide-[#EFECE3] grid grid-cols-2 items-center px-4 py-3 text-center">
-        {{i.stationName}}
-        <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' i.stationID %}">
-            View Routes
-        </a>    
-        </li>
-    {% endfor %}
-    </ul>
+        <ul class=" bg-white divide-y divide-[#EFECE3]">
+        {% for i in intertown_station %}
+            <li class="divide-x divide-[#EFECE3] grid grid-cols-2 items-center px-4 py-3 text-center">
+            {{i.stationName}}
+            <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' i.stationID %}">
+                View Routes
+            </a>    
+            </li>
+        {% endfor %}
+        </ul>
     </div> 
-    </div>
-    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_create' %}">
+</div>
+
+<div class="text-center">
+    <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 item-center" href="{% url 'station_create' %}">
         Add Station
     </a>    
 </div>

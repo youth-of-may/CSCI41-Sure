@@ -11,6 +11,7 @@ Customer Information
 
 <div class=" scale-130 pt-15 max-w-7xl mx-auto p-6 space-y-8">
     <div class="w-full p-2 mb-4 bg-white text-center justify-center">
+
         <form method="POST">
             {% csrf_token %}
             <div class = "pb-2">
@@ -22,6 +23,7 @@ Customer Information
                     {% endfor %}
                 </select>
             </div>
+
             <div class = "pb-2">
                 <label for="maintenanceDate" class="mb-2 font-medium">Maintenance Date</label>
                 <input type="date" id="maintenanceDate" name="maintenanceDate" class="w-sm p-2 mb-4s bg-gray-200" required>
@@ -29,6 +31,7 @@ Customer Information
                 <label for="crew" class="mb-2 font-medium">Crew In Charge</label>
                 <input type="text" id="crw" name="crew" class="w-sm p-2 mb-4s bg-gray-200" required>
             </div>
+            
             <div class = "pb-2">
                 <label for="task" class="mb-2 font-medium">Tasks</label>
                 <input type="text" id="task" name="task" class="w-sm p-2 mb-4s bg-gray-200" required>
