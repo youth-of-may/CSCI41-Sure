@@ -6,18 +6,71 @@
 
 {% block content %}
 <div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
-        <h1 class="text-2xl text-white font-semibold text-center">Schedules</h1>
+        <h1 class="text-2xl text-white font-semibold text-center">{{local.tripDate}}</h1>
 </div>
+{{local}}
+{{intertown}}
 <div>
     <!--use the template found in booking to style this-->
     <!--loop through the stuff inside local and intertown-->
-    <ul>
-    {% for l in local %}   
-    
-    {% endfor %}
-    {% for i in intertown %}   
-    
-    {% endfor %}
-    </ul>
+    <ul>  
+    <div class="pb-10">
+        <h2 class="bg-[#000272] text-white font-semibold text-center py-4 text-xl">
+        Local Trips
+        </h2>  
+        <div class="divide-x divide-[#EFECE3] grid grid-cols-7 bg-[#5A698E] text-white font-semibold text-center py-2 px-4 text-sm">
+            <div>Train No.</div>
+            <div>Origin</div>
+            <div>Destination</div>
+            <div>Departure</div>
+            <div>Arrival</div>
+            <div>Duration</div>
+            <div>Cost</div>
+        </div>
+        <ul class=" bg-white divide-y divide-[#EFECE3]">
+        {% for l in local %}
+            <li class="divide-x divide-[#EFECE3] grid grid-cols-3 items-center px-4 py-3 text-center">
+                <span>{{l.trainID}} </span>
+                <span>{{l.Origin}} </span>
+                <span>{{l.Destination}} </span>
+                <span>{{l.Departure}} </span>
+                <span>{{l.Arrival}} </span>
+                <span>{{l.actualDuration}} </span>
+                <span>{{l.baseCost}} </span>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="pb-10">
+        <h2 class="bg-[#000272] text-white font-semibold text-center py-4 text-xl">
+        Intertown Trips
+        </h2>  
+        <div class="divide-x divide-[#EFECE3] grid grid-cols-7 bg-[#5A698E] text-white font-semibold text-center py-2 px-4 text-sm">
+            <div>Train No.</div>
+            <div>Origin</div>
+            <div>Destination</div>
+            <div>Departure</div>
+            <div>Arrival</div>
+            <div>Duration</div>
+            <div>Cost</div>
+        </div>
+        <ul class=" bg-white divide-y divide-[#EFECE3]">
+        {% for i in intertown %}
+            <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
+                <span>{{i.i.trainID}} </span>
+                <span>{{i.Origin}} </span>
+                <span>{{i.Destination}} </span>
+                <span>{{i.Departure}} </span>
+                <span>{{i.Arrival}} </span>
+                <span>{{i.actualDuration}} </span>
+                <span>{{i.baseCost}} </span>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
 </div>
+
+
 {% endblock %}
