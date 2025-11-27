@@ -45,7 +45,10 @@ def get_train_details(train_id = None):
     Returns all columns of train
     """
     sql = """
-    SELECT * FROM train 
+    SELECT trainID, model, seriesType, maxSpeed, numSeats, numToilets, 
+    IF(recliningSeats = 1, 'Yes', 'No') AS reclining, IF(foldingTables = 1, 'Yes', 'No') AS folding, IF(disabilityAccess = 1, 'Yes', 'No') AS access, 
+    IF(luggageStorage = 1, 'Yes', 'No') AS luggage, IF(vendingMachine = 1, 'Yes', 'No') AS vending, IF(foodService = 1, 'Yes', 'No') AS food
+    FROM train 
     WHERE trainID = %s;
     """
     return db.execute(sql, [train_id])
