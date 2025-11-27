@@ -5,42 +5,46 @@ Customer Information
 {% endblock %}
 
 {% block content %}
-<h1>New Maintenance</h1>
-    
-    <form method="POST">
-        {% csrf_token %}
-        <div>
-            <label for="train">Train</label>
-            <select id="train" name="train" required>
-                <option value="">Select</option>
-                {% for t in trains %}
-                <option value="{{t.trainID}}">Model {{t.model}}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label for="maintenanceDate">Maintenance Date</label>
-            <input type="date" id="maintenanceDate" name="maintenanceDate" required>
-        </div>
-        <div>
-            <label for="crew">Crew In Charge</label>
-            <input type="text" id="crw" name="crew" required>
-        </div>
-        <div>
-            <label for="task">Tasks</label>
-            <input type="text" id="task" name="task" required>
-        </div>
-        <div>
-            <label for="train_condition">Train Condition</label>
-            <select id="train_condition" name="train_condition" required>
-                <option value="">Select</option>
-                <option value="0">Excellent</option>
-                <option value="1">Very Good</option>
-                <option value="2">Satisfactory</option>
-                <option value="3">Poor</option>
-            </select>
-        </div>
-        
-        <button type="submit">Add Maintenance</button>
-    </form>
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+    <h1 class="text-3xl text-white font-bold text-center">New Train Maintenance</h1>
+</div>
+
+<div class=" scale-130 pt-15 max-w-7xl mx-auto p-6 space-y-8">
+    <div class="w-full p-2 mb-4 bg-white text-center justify-center">
+        <form method="POST">
+            {% csrf_token %}
+            <div class = "pb-2">
+                <label for="train" class="mb-2 font-medium">Train</label>
+                <select id="train" name="train" class="w-sm p-2 mb-4s bg-gray-200" required>
+                    <option value="">Select</option>
+                    {% for t in trains %}
+                    <option value="{{t.trainID}}">Model {{t.model}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class = "pb-2">
+                <label for="maintenanceDate" class="mb-2 font-medium">Maintenance Date</label>
+                <input type="date" id="maintenanceDate" name="maintenanceDate" class="w-sm p-2 mb-4s bg-gray-200" required>
+                
+                <label for="crew" class="mb-2 font-medium">Crew In Charge</label>
+                <input type="text" id="crw" name="crew" class="w-sm p-2 mb-4s bg-gray-200" required>
+            </div>
+            <div class = "pb-2">
+                <label for="task" class="mb-2 font-medium">Tasks</label>
+                <input type="text" id="task" name="task" class="w-sm p-2 mb-4s bg-gray-200" required>
+
+                <label for="train_condition" class="mb-2 font-medium">Train Condition</label>
+                <select id="train_condition" name="train_condition" class="w-sm p-2 mb-4s bg-gray-200" required>
+                    <option value="">Select</option>
+                    <option value="0">Excellent</option>
+                    <option value="1">Very Good</option>
+                    <option value="2">Satisfactory</option>
+                    <option value="3">Poor</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">Add Maintenance</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
