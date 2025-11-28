@@ -23,3 +23,7 @@ def login_view(request):
         return render(request, "login.html", {"error": "Invalid credentials"})
     else:
         return render(request, "trainapp/customer/customer_login.html")
+    
+def logout(request):
+    request.session.flush()
+    return redirect('login')

@@ -24,6 +24,11 @@
                     <a href="{% url 'station_list' %}" class="px-3 py-2 text-sm text-white hover:text-gray-200">Routes</a>
                     <a href="{% url 'schedule_list' %}" class="px-3 py-2 text-sm text-white hover:text-gray-200">Schedule</a>
                     <a href="{% url 'tirian_admin' %}" class="px-3 py-2 text-sm text-white hover:text-gray-200">Admin</a>
+                    {% if request.session.user_id %}
+                        <a href="{% url 'logout' %}" class="px-3 py-2 text-sm text-white hover:text-gray-200">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="px-3 py-2 text-sm text-white hover:text-gray-200">Login</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
