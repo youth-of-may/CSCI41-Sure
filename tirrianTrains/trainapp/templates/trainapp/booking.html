@@ -32,32 +32,21 @@ Booking
 
         <!-- body -->
         <ul class=" bg-white divide-y divide-[#EFECE3]">
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a 
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a 
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
+            {% for l in local_trips %}
+                <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
+                    <span>{{l.tripDate}}</span>
+                    <span>{{l.originStation}}</span>
+                    <span>{{l.destinationStation}}</span>
+                    <span>{{l.departureTime}}</span>
+                    <span>{{l.arrivalTime}}</span>
+                    <span>{{l.baseCost}}</span>
+                    <a 
+                        class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+                    >
+                        View
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
       </div>
 
@@ -80,84 +69,21 @@ Booking
 
         <!-- body -->
         <ul class=" bg-white divide-y divide-[#EFECE3]">
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a  
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a  
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a  
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a  
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a  
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
-          <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <ul> test </ul>
-              <a 
-                  class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-              >
-                  View
-              </a>
-          </li>
+            {% for i in intertown_trips %}
+                <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
+                    <span>{{i.tripDate}}</span>
+                    <span>{{i.originStation}}</span>
+                    <span>{{i.destinationStation}}</span>
+                    <span>{{i.departureTime}}</span>
+                    <span>{{i.arrivalTime}}</span>
+                    <span>{{i.baseCost}}</span>
+                    <a 
+                        class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
+                    >
+                        View
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
       </div>
     </div>
