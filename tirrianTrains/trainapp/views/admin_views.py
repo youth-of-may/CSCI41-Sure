@@ -20,12 +20,10 @@ def admin_travel_history(request, pk):
 
 def admin_ticket_sales(request):
     """
-    Show the sales from a specific date,
-    -- Is called by the form in admin_details
+    Show the sales from a specific date
     """
     date = request.GET.get("ticketDate")
-    print("showing date: ", date)
-    
+
     if date:
         tickets = list_sales_per_date(date)
     else:
@@ -46,6 +44,6 @@ def customer_ticket_trips(request, pk):
     context= {
         'ticketNum': pk,
         'customer': ticketCustDetails(ticket_id=pk),
-        'trips': ticketTripDetails(ticket_id=pk),
+        'ticket': ticketDetails(ticket_id=pk),
     }
     return render(request, "trainapp/admin/customer_ticket.html", context)

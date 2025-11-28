@@ -11,23 +11,33 @@
 </div>
 <div>
     <ul>
-        <li>Customer ID: {{customer.customerID}}</li>
-        <li>Last Name: {{customer.lastName}}</li>
-        <li>Given Name: {{customer.givenName}}</li>
-        <li>Middle Initial: {{customer.middleInitial}}</li>
-        <li>Birthdate: {{customer.birthDate}}</li>
-        <li>Gender: {{customer.gender}}</li>
+        <li>Ticket Date: {{ ticket.0.date|date:"F d, Y" }}</li>
+        <li>Total Cost: ₱{{ ticket.0.total }}</li>
+        <li>Customer ID: {{ customer.customerID }}</li>
+        <li>Last Name: {{ customer.lastName }}</li>
+        <li>Given Name: {{ customer.givenName }}</li>
+        <li>Middle Initial: {{ customer.middleInitial }}</li>
+        <li>Birthdate: {{ customer.birthDate|date:"F d, Y" }}</li>
+        <li>Gender: {{ customer.gender }}</li>
     </ul>
 </div>
-<div class="bg-[#000272] flex h-28 items-center justify-center px-1 m-6">
-        <h2 class="text-2xl text-white font-semibold text-center">Travel History</h2>
-</div>
+
 <div>
+    <h2 class="bg-[#000272] flex h-28 items-center justify-center px-1 m-6 text-white font-semibold text-xl text-center">
+        Travel History
+    </h2>
     <ul>
-    {% for t in trips %}
-    <li>{{t.trainID}} {{t.departureTime}} {{t.arrivalTime}} {{t.actualDuration}} {{t.origin}} {{t.destination}}
-    </li>
-    {% endfor %}
+        {% for t in ticket %}
+        <li>
+            Train: {{ t.train_number }} | 
+            Origin: {{ t.origin }} | 
+            Destination: {{ t.destination }} | 
+            Departure: {{ t.departure }} | 
+            Arrival: {{ t.arrival }} | 
+            Duration: {{ t.duration }} | 
+            Cost: ₱{{ t.cost }}
+        </li>
+        {% endfor %}
     </ul>
 </div>
 <a href="{% url 'tirian_admin' %}">Back</a>

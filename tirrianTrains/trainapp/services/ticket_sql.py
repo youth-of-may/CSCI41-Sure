@@ -60,9 +60,12 @@ def ticketDetails(ticket_id=None):
         st.departureTime AS departure,
         st.arrivalTime AS arrival,
         COALESCE(st.actualDuration, r.estimatedDuration) AS duration,
-        tt.tripCost AS cost
+        tt.tripCost AS cost,
+        t.totalCost AS total,
+        t.ticketDate AS date
     FROM ticketTrip tt
     JOIN scheduledTrip st ON tt.tripScheduleID = st.tripScheduleID
+    JOIN ticket t ON t.ticketID = tt.ticketID
     JOIN route r ON st.routeID = r.routeID
     JOIN station origin ON r.originStationID = origin.stationID
     JOIN station dest ON r.destinationStationID = dest.stationID
@@ -95,27 +98,3 @@ def ticketCustDetails(ticket_id=None):
     """
     results = db.execute(sql, [ticket_id])
     return results[0]
-
-
-def ticketTripDetails(ticket_id = None):
-    """Generate all related trips or itineraries given a ticket_id"""
-    sql = """
-    SELECT 
-    trip.trainID,
-    trip.departureTime,
-    trip.arrivalTime,
-    trip.actualDuration,
-    s1.stationName AS origin,
-    s2.stationName AS destination
-    FROM scheduledTrip trip
-    JOIN ticketTrip t 
-        ON trip.tripScheduleID = t.tripScheduleID
-    JOIN route r
-        ON trip.routeID = r.routeID
-    JOIN station s1
-        ON s1.stationID = r.originStationID
-    JOIN station s2
-        ON s2.stationID = r.destinationStationID
-    WHERE t.ticketId = %s;
-    """
-    return db.execute(sql, [ticket_id])
