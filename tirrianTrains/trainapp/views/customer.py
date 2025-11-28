@@ -15,4 +15,4 @@ def login_view(request):
     if request.method == 'POST':
         return HttpResponse("Work in Progress Hehe")
     else:
-        return HttpResponse("Work in Progress hehe")
+        return render(request, "trainapp/customer/customer_login.html")

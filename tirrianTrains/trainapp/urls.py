@@ -1,5 +1,5 @@
 from django.urls import path
-from trainapp.views.customer import create_customer_view
+from trainapp.views.customer import create_customer_view, login_view
 from trainapp.views.booking import booking_page
 from trainapp.views.maintenance import *
 from trainapp.views.trips import *
@@ -10,6 +10,7 @@ from trainapp.views.homepage import homepage
 urlpatterns = [
     path('homepage/', homepage, name="homepage"),
     path('register/', create_customer_view, name='customer_creation'),
+    path('login/', login_view, name='login'),
     path('booking/', booking_page, name='booking_page'),
     path('maintenance/add', maintenance_add, name="maintenance_add"),
     path('train/<int:pk>/details', get_maintenance_history, name="train_detail"),
