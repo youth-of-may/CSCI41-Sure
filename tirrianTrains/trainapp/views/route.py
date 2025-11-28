@@ -29,7 +29,11 @@ def stations_add(request):
 
 def route_price_history(request, routeID):
     ''' Show the price changes made on a specific route '''
-    return render(request, "trainapp/price/price_history.html",{'routePriceHistory':generate_price_history(routeID)})
+    context ={
+        'routePriceHistory': generate_price_history(routeID),
+        'routeInfo': get_route_info(routeID),
+    }
+    return render(request, "trainapp/price/price_history.html",context)
 
 def change_route_price(request, routeID):
     ''' Change the base price of a route '''

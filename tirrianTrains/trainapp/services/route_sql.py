@@ -37,3 +37,16 @@ def get_destination_routes(destID):
     WHERE r.destinationStationID=%s
     ;"""
     return db.execute(sql, [destID])
+
+def get_route_info(routeID):
+    sql = '''
+        SELECT r.routeID,
+               s1.stationName AS origin,
+               s2.stationName AS destination
+        FROM route r
+        JOIN station s1 ON s1.stationID = r.originStationID
+        JOIN station s2 ON s2.stationID = r.destinationStationID
+        WHERE r.routeID = %s;
+    '''
+    data = db.execute(sql, [routeID])
+    return data[0]
