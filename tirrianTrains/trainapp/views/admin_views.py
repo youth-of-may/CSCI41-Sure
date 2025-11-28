@@ -27,8 +27,7 @@ def admin_ticket_sales(request):
     print("showing date: ", date)
     
     if date:
-        sql = "SELECT * FROM ticket WHERE ticketDate = %s"
-        tickets = db.execute(sql, [date])
+        tickets = list_sales_per_date(date)
     else:
         tickets = []
     

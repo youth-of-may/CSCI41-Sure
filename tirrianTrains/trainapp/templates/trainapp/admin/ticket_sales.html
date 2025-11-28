@@ -10,16 +10,19 @@ Sales Report for {{ date }}
         <table>
             <tr>
                 <th>Ticket ID</th>
-                <th>Customer</th>
+                <th>Customer Name</th>
                 <th>Total Cost</th>
                 <th>Details</th> <!-- I can remove this if not yet implemented -->
             </tr>
             {% for t in tickets %}
                 <tr>
                     <td>{{ t.ticketID }}</td>
-                    <td>{{ t.customerID }}</td>
+                    <td>{{ t.Customer }}</td>
                     <td>{{ t.totalCost }}</td>
-                    <td>View</td> <!-- I can remove this if not yet implemented -->
+                    <a href="{% url 'ticket_trips' t.ticketID %}">
+                        View
+                    </a>
+
                 </tr>
             {% endfor %}
         </table>

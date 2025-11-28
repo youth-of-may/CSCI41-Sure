@@ -39,7 +39,7 @@ def list_sales_per_date(ticket_date=None):
     Retrieves sales given a date
     Returns: ticket #, Customer Name, Total Cost
     """
-    sql = """SELECT * ticket.ticketID, CONCAT(c.givenName, ' ', COALESCE(CONCAT(c.middleInitial, '. '), ''), ' ', c.lastName) AS Customer, ticket.totalCost 
+    sql = """SELECT ticket.ticketID, CONCAT(c.givenName, ' ', COALESCE(CONCAT(c.middleInitial, '. '), ''), ' ', c.lastName) AS Customer, ticket.totalCost 
     FROM ticket
     JOIN customer c 
     ON ticket.customerID = c.customerID
