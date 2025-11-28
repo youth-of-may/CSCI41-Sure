@@ -77,7 +77,8 @@ CREATE TABLE customer (
     givenName VARCHAR(50) NOT NULL,
     middleInitial VARCHAR(1),
     birthDate DATE NOT NULL,
-    gender VARCHAR(10)
+    gender VARCHAR(10),
+    email VARCHAR(100) UNIQUE, 
 );
 
 CREATE TABLE ticket (
