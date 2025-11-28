@@ -9,7 +9,7 @@ Customer Information
     <h1 class="text-3xl text-white font-bold text-center">New Customer Registration</h1>
 </div>
 
-<div class=" scale-130 pt-15 max-w-7xl mx-auto p-6 space-y-8">
+<div class=" scale-110 pt-15 max-w-7xl mx-auto p-6 space-y-8">
     <div class="w-full p-2 mb-4 bg-white text-center justify-center">
         <form method="POST">
             {% csrf_token %}
@@ -37,6 +37,10 @@ Customer Information
 
                 <label for="birthDate" class="mb-2 font-medium">Birth Date:</label>
                 <input type="date" id="birthDate" name="birthDate" class="w-md p-2 mb-4s bg-gray-200" required>
+            </div>
+            <div>
+                <label for="email" class="mb-2 font-medium">Email:</label>
+                <input type="email" id="email" name="email" class="w-md p-2 mb-4s bg-gray-200" required>
             </div>
             
             <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 item-center" type="submit">Submit Information</button>

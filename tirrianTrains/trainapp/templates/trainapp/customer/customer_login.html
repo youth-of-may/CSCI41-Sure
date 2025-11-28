@@ -11,9 +11,9 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
 
-            <!-- Username -->
-            <label class="block mb-2 font-medium" for="username">Username</label>
-            <input type="text" id="username" name="username" class="w-full p-2 border rounded mb-4"required>
+            <!-- Email -->
+            <label class="block mb-2 font-medium" for="Email">Email</label>
+            <input type="text" id="email" name="email" class="w-full p-2 border rounded mb-4"required>
 
             <!-- Password -->
             <label class="block mb-2 font-medium" for="password">Password</label>

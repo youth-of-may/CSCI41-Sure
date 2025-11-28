@@ -20,15 +20,15 @@ CREATE TABLE ticket (
 """
 
 #execute a create function for the customer 
-def create_customer(lastName, givenName, middleInitial, birthDate, gender):
+def create_customer(lastName, givenName, middleInitial, birthDate, gender, email):
     """
     Function used to create a new customer
     """
     sql = '''
-    INSERT INTO customer(lastName, givenName, middleInitial, birthDate, gender)
-    VALUES (%s, %s, %s, %s, %s);
+    INSERT INTO customer(lastName, givenName, middleInitial, birthDate, gender, email)
+    VALUES (%s, %s, %s, %s, %s, %s);
     '''
-    return db.execute_return_lastrowid(sql, [lastName, givenName, middleInitial, birthDate, gender])
+    return db.execute_return_lastrowid(sql, [lastName, givenName, middleInitial, birthDate, gender, email])
 
 def get_customer(customerID=1):
     """
@@ -42,9 +42,11 @@ def query_customer(email):
     """
     Queries a customer based on their email isntead of the customerID
     """
-    
-    customer = db.execute("SELECT * FROM customer WHERE email = %s", [email])
-    return customer[0]
+    customer = db.execute("SELECT * FROM customer WHERE email = %s;", [email])
+    if customer:
+        return customer[0]
+    else:
+        return None
 
 def list_customers():
     """
