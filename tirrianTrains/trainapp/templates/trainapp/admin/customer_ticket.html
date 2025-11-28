@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-
+Ticket Information
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 <div>
     <ul>
         <li>Ticket Date: {{ ticket.0.date|date:"F d, Y" }}</li>
-        <li>Total Cost: ₱{{ ticket.0.total }}</li>
+        <li>Total Cost: {{ ticket.0.total }}</li>
         <li>Customer ID: {{ customer.customerID }}</li>
         <li>Last Name: {{ customer.lastName }}</li>
         <li>Given Name: {{ customer.givenName }}</li>
