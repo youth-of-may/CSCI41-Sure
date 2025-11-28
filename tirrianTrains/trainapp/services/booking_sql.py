@@ -42,7 +42,7 @@ def list_local_trips():
     
     sql = '''
     SELECT 
-        s.tripDate, so.stationName AS originStation, sd.stationName AS destinationStation,
+        s.tripScheduleID, s.tripDate, so.stationName AS originStation, sd.stationName AS destinationStation,
         s.departureTime, s.arrivalTime, r.baseCost FROM scheduledTrip AS s
     JOIN route AS r 
         ON s.routeID = r.routeID
@@ -65,7 +65,7 @@ def list_intertown_trips():
     """
     sql = '''
     SELECT 
-        s.tripDate, so.stationName AS originStation, sd.stationName AS destinationStation,
+        s.tripScheduleID, s.tripDate, so.stationName AS originStation, sd.stationName AS destinationStation,
         s.departureTime, s.arrivalTime, r.baseCost
     FROM scheduledTrip AS s
     JOIN route AS r 
@@ -81,3 +81,28 @@ def list_intertown_trips():
     '''
 
     return db.execute(sql)
+
+def get_trips(tripIDs):
+    if not tripIDs:
+        return []  # return empty list if no IDs provided
+
+    # Create a string of %s placeholders, one for each trip ID
+    placeholders = ",".join(["%s"] * len(tripIDs))
+
+    sql = f'''
+    SELECT 
+        s.trainID, so.stationName AS originStation, sd.stationName AS destinationStation,
+        s.departureTime, s.arrivalTime, s.actualDuration, r.baseCost
+    FROM scheduledTrip AS s
+    JOIN route AS r 
+        ON s.routeID = r.routeID
+    JOIN station AS so 
+        ON r.originStationID = so.stationID
+    JOIN station AS sd 
+        ON r.destinationStationID = sd.stationID
+    WHERE 
+        s.tripScheduleID IN ({placeholders})
+    ORDER BY s.tripDate;
+    '''
+
+    return db.execute(sql, tripIDs)

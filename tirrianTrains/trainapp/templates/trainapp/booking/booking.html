@@ -32,7 +32,7 @@ Booking
 
         <!-- body -->
         <ul class=" bg-white divide-y divide-[#EFECE3]">
-            {% for l in local_trips %}
+            {% for l in local %}
                 <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
                     <span>{{l.tripDate}}</span>
                     <span>{{l.originStation}}</span>
@@ -40,10 +40,8 @@ Booking
                     <span>{{l.departureTime}}</span>
                     <span>{{l.arrivalTime}}</span>
                     <span>{{l.baseCost}}</span>
-                    <a 
-                        class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-                    >
-                        View
+                    <a href="{% url 'booking_add' l.tripScheduleID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+                        Select
                     </a>
                 </li>
             {% endfor %}
@@ -69,7 +67,7 @@ Booking
 
         <!-- body -->
         <ul class=" bg-white divide-y divide-[#EFECE3]">
-            {% for i in intertown_trips %}
+            {% for i in intertown %}
                 <li class="divide-x divide-[#EFECE3] grid grid-cols-7 items-center px-4 py-3 text-center">
                     <span>{{i.tripDate}}</span>
                     <span>{{i.originStation}}</span>
@@ -77,10 +75,8 @@ Booking
                     <span>{{i.departureTime}}</span>
                     <span>{{i.arrivalTime}}</span>
                     <span>{{i.baseCost}}</span>
-                    <a 
-                        class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-                    >
-                        View
+                    <a href="{% url 'booking_add' i.tripScheduleID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+                        Select
                     </a>
                 </li>
             {% endfor %}
