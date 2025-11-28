@@ -13,22 +13,11 @@
 
             <!-- Username -->
             <label class="block mb-2 font-medium" for="username">Username</label>
-            <input 
-                type="text" 
-                id="username" 
-                name="username" 
-                class="w-full p-2 border rounded mb-4"
-                required
-            >
+            <input type="text" id="username" name="username" class="w-full p-2 border rounded mb-4"required>
 
             <!-- Password -->
             <label class="block mb-2 font-medium" for="password">Password</label>
-            <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                class="w-full p-2 border rounded mb-6"
-            >
+            <input type="password" id="password" name="password" class="w-full p-2 border rounded mb-6">
 
             {% if error %}
                 <p class="text-red-600 text-sm mb-4">{{ error }}</p>

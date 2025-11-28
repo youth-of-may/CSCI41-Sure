@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from trainapp.services.customer_sql import create_customer
+from django.shortcuts import render, redirect
+from trainapp.services.customer_sql import create_customer, query_customer
 from django.http import HttpResponse
 
 """
@@ -13,6 +13,13 @@ def create_customer_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        return HttpResponse("Work in Progress Hehe")
+        email = request.POST["email"]
+        
+        user = query_customer(email)
+        if user:
+            request.session["customer_id"] = user["customerID"]
+            return redirect("homepage")
+        # If unsuccessful login
+        return render(request, "login.html", {"error": "Invalid credentials"})
     else:
         return render(request, "trainapp/customer/customer_login.html")
