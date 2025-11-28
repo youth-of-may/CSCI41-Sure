@@ -40,12 +40,15 @@ def booking_add(request, tripID):
     if not sessionTrips:
         return redirect("booking_page")
     
-    
     trips = get_trips(sessionTrips)
+    totalCost = sum(t['baseCost'] for t in trips)
+    print(sessionTrips)
     context = {
         "customer": customer[0],
         "trips": trips,
         "selected_trips": sessionTrips,
+        "date": date.today(),
+        "totalCost": totalCost,
     }
     
     return render(request, "trainapp/booking/ticket_preview.html", context)
