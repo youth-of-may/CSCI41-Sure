@@ -93,8 +93,23 @@ def ticketCustDetails(ticket_id=None):
     c.middleInitial, c.birthDate, c.gender
     FROM customer c 
     JOIN ticket t
-    ON c.customerID = t.ticketID
+    ON c.customerID = t.customerID
     WHERE t.ticketID = %s;
     """
     results = db.execute(sql, [ticket_id])
     return results[0]
+
+def db_create_ticket(customerID, ticketDate, totalCost):
+    sql = """
+        INSERT INTO ticket (customerID, ticketDate, totalCost)
+        VALUES (%s, %s, %s)
+    """
+
+    return db.execute_return_lastrowid(sql, [customerID, ticketDate, totalCost])
+
+def create_ticket_trip(ticketID, tripID, tripCost):
+    sql = """
+        INSERT INTO ticketTrip (ticketID, tripScheduleID, tripCost)
+        VALUES (%s, %s, %s)
+    """
+    return db.execute(sql, [ticketID, tripID, tripCost])

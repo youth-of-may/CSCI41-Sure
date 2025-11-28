@@ -41,7 +41,11 @@ Booking
                     <span>{{l.arrivalTime}}</span>
                     <span>{{l.baseCost}}</span>
                     <a href="{% url 'booking_add' l.tripScheduleID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
-                        Select
+                      {% if l.tripScheduleID in selected_trips %}
+                        Remove
+                      {% else %}
+                        Add
+                      {% endif %}
                     </a>
                 </li>
             {% endfor %}
@@ -76,7 +80,11 @@ Booking
                     <span>{{i.arrivalTime}}</span>
                     <span>{{i.baseCost}}</span>
                     <a href="{% url 'booking_add' i.tripScheduleID %}" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
-                        Select
+                      {% if i.tripScheduleID in selected_trips %}
+                        Remove
+                      {% else %}
+                        Add
+                      {% endif %}
                     </a>
                 </li>
             {% endfor %}

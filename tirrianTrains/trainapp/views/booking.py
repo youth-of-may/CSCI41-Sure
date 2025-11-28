@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from trainapp.services.booking_sql import list_local_trips, list_intertown_trips, get_trips
 from trainapp.services.customer_sql import get_full_customer
-import trainapp._db as db #importing to query sql directly in this view
+from trainapp.services.ticket_sql import *
+from datetime import date
 
 
 def booking_page(request):
@@ -17,12 +18,15 @@ def booking_page(request):
     })
     
 def booking_add(request, tripID):
+    """
+    Add or remove a trip to a potential ticket
+    """
+    
     customer_id = request.session.get("customer_id")
     if not customer_id:
         return redirect("login")
     
     customer = get_full_customer(customer_id)
-    print(customer)
     sessionTrips = request.session.get('selected_trips', [])
     
     if tripID not in sessionTrips:
@@ -41,10 +45,30 @@ def booking_add(request, tripID):
     context = {
         "customer": customer[0],
         "trips": trips,
+        "selected_trips": sessionTrips,
     }
-    print(context)
     
     return render(request, "trainapp/booking/ticket_preview.html", context)
 
-def create_ticket(request, customerID):
-    return HttpResponse("still making")
+def create_ticket(request):
+    """
+    Creates new ticket, ticketTrips and then shows the final ticket
+    Clears tripIDs from session
+    """
+    customer_id = request.session.get("customer_id")
+    if not customer_id:
+        return redirect("login")
+    
+    # Get all necessary data to make the final ticket and trips
+    sessionTrips = request.session.get('selected_trips', [])
+    trips = get_trips(sessionTrips)
+    totalCost = sum(t['baseCost'] for t in trips)
+    
+    ticketID = db_create_ticket(customer_id, date.today(), totalCost)
+    # Create all the individual trips
+    for x in range(len(trips)):
+        create_ticket_trip(ticketID, sessionTrips[x], trips[x]["baseCost"])
+    
+    # Clear session cookies then redirect
+    del request.session['selected_trips']
+    return redirect("ticket_trips", pk=ticketID)
