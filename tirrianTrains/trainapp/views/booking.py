@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from trainapp.services.booking_sql import list_local_trips, list_intertown_trips, get_trips
-from trainapp.services.customer_sql import get_customer
+from trainapp.services.customer_sql import get_full_customer
 import trainapp._db as db #importing to query sql directly in this view
 
 
@@ -21,7 +21,8 @@ def booking_add(request, tripID):
     if not customer_id:
         return redirect("login")
     
-    customer = get_customer(customer_id)
+    customer = get_full_customer(customer_id)
+    print(customer)
     sessionTrips = request.session.get('selected_trips', [])
     
     if tripID not in sessionTrips:
@@ -30,11 +31,18 @@ def booking_add(request, tripID):
     else:
         sessionTrips.remove(tripID)
         request.session['selected_trips'] = sessionTrips
+    
+    # If removed all trips from session go back to booking
+    if not sessionTrips:
+        return redirect("booking_page")
+    
+    
     trips = get_trips(sessionTrips)
     context = {
-        "customer": customer,
+        "customer": customer[0],
         "trips": trips,
     }
+    print(context)
     
     return render(request, "trainapp/booking/ticket_preview.html", context)
 

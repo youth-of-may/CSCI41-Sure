@@ -38,6 +38,10 @@ def get_customer(customerID=1):
     result = db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer WHERE customerID=%s;", [customerID])
     return result[0]
 
+def get_full_customer(customerID):
+    sql = "SELECT * FROM customer WHERE customerID = %s"
+    return db.execute(sql, [customerID])
+
 def query_customer(email):
     """
     Queries a customer based on their email isntead of the customerID
