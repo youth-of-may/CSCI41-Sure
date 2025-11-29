@@ -23,6 +23,7 @@ def returnStations(routeID = None):
     WHERE route.routeID = %s;
     """
     return db.execute(sql, [routeID])
+
 def get_destination_routes(destID):
     """
     Retrieve all the routes leading to a destination station using destID
@@ -37,6 +38,21 @@ def get_destination_routes(destID):
     WHERE r.destinationStationID=%s
     ;"""
     return db.execute(sql, [destID])
+
+def filter_destination_routes(destID, routeType):
+    """
+    Retrieve all the routes leading to a destination station using destID
+    """
+    sql = """SELECT r.routeID, s1.stationName AS origin, s2.stationName AS destination, 
+    IF(r.isLocalRoute = 1, 'Local', 'Intertown') AS routeType, estimatedDuration 
+    FROM route r 
+    JOIN station s1 
+    ON s1.stationID = r.originStationID
+    JOIN station s2 
+    ON s2.stationID = r.destinationStationID
+    WHERE r.destinationStationID=%s AND r.isLocalRoute=%s
+    ;"""
+    return db.execute(sql, [destID, routeType])
 
 def get_route_info(routeID):
     sql = '''
