@@ -54,4 +54,12 @@ def update_route_price(routeID, newPrice):
     '''
     db.execute(insert_sql, [routeID, newPrice, now])
 
+    update_route_sql = ''' 
+        UPDATE route 
+        SET baseCost = %s 
+        WHERE routeID = %s; 
+    ''' 
+    
+    db.execute(update_route_sql, [newPrice, routeID])
+
     return "Price changed"

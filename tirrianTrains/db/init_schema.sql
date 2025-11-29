@@ -45,7 +45,6 @@ CREATE TABLE route (
     FOREIGN KEY (destinationStationID) REFERENCES station(stationID),
     CHECK (originStationID != destinationStationID),
     CHECK (isLocalRoute = 0 OR (isLocalRoute = 1 AND estimatedDuration = 5)),
-    CHECK (isLocalRoute = 0 OR (isLocalRoute = 1 AND baseCost = 2)),
     UNIQUE (originStationID, destinationStationID)
 );
 

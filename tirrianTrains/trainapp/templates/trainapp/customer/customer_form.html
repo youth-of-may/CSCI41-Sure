@@ -46,5 +46,17 @@ Customer Information
             <button class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 item-center" type="submit">Submit Information</button>
         </form>
     </div>
+
+    {% if messages %}
+        <div class="my-4">
+            {% for message in messages %}
+                <div class="p-3 mb-2 text-white 
+                    {% if message.tags == 'error' %} bg-red-500 {% endif %}
+                rounded">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
