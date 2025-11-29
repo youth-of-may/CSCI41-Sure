@@ -1,3 +1,4 @@
+DROP DATABASE tiriantrainsdb;
 CREATE DATABASE tiriantrainsdb;
 
 USE tiriantrainsdb;
@@ -78,7 +79,7 @@ CREATE TABLE customer (
     middleInitial VARCHAR(1),
     birthDate DATE NOT NULL,
     gender VARCHAR(10),
-    email VARCHAR(100) UNIQUE, 
+    email VARCHAR(100) UNIQUE 
 );
 
 CREATE TABLE ticket (

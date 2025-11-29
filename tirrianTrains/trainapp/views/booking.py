@@ -12,9 +12,11 @@ def booking_page(request):
     intertown_trips = list_intertown_trips()
 
     # Currently does not actually load the trips since the template is showing hardcoded stuff
+    selected_trips = request.session.get('selected_trips', [])
     return render(request, "trainapp/booking/booking.html", {
         "local": local_trips,
         "intertown": intertown_trips,
+        "selected_trips": selected_trips,
     })
     
 def booking_add(request, tripID):

@@ -35,7 +35,7 @@ def get_customer(customerID=1):
     Retrieves a customer given a customerID
     Returns all columns of customer
     """
-    result = db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer WHERE customerID=%s;", [customerID])
+    result = db.execute("SELECT customerID, CONCAT(givenName, ' ', COALESCE(CONCAT(middleInitial, '. '), ''), lastName) AS name, birthDate, gender FROM customer WHERE customerID=%s;", [customerID])
     return result[0]
 
 def get_full_customer(customerID):
@@ -56,7 +56,7 @@ def list_customers():
     """
     Retrieves the list of customers
     """
-    return db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer ORDER BY customerID;", [])
+    return db.execute("SELECT customerID, CONCAT(givenName, ' ', COALESCE(CONCAT(middleInitial, '. '), ''), lastName) AS name, birthDate, gender FROM customer ORDER BY customerID;", [])
 
 def generate_travel_history(customerID=1):
     """
