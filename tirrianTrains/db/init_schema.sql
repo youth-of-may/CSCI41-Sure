@@ -28,14 +28,10 @@ CREATE TABLE maintenance (
     train_condition ENUM('Excellent', 'Very Good', 'Satisfactory', 'Poor') NOT NULL,
     FOREIGN KEY (trainID) REFERENCES train(trainID)
 );
-/*
-important point to take note of: station names are unique
-*/
 
 CREATE TABLE station (
     stationID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    stationName VARCHAR(50) NOT NULL UNIQUE,
-    isLocalStation BOOLEAN NOT NULL DEFAULT 1
+    stationName VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE route (
@@ -67,7 +63,6 @@ CREATE TABLE scheduledTrip (
     tripDate DATE NOT NULL,
     departureTime TIME NOT NULL,
     arrivalTime TIME NOT NULL,
-    actualDuration INT,
     FOREIGN KEY (routeID) REFERENCES route(routeID),
     FOREIGN KEY (trainID) REFERENCES train(trainID)
 );
@@ -86,7 +81,6 @@ CREATE TABLE ticket (
     ticketID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customerID INT NOT NULL,
     ticketDate DATE NOT NULL,
-    totalCost INT NOT NULL,
     FOREIGN KEY (customerID) REFERENCES customer(customerID)
 );
 
