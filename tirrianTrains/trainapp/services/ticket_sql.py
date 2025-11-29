@@ -102,13 +102,13 @@ def ticketCustDetails(ticket_id=None):
     results = db.execute(sql, [ticket_id])
     return results[0]
 
-def db_create_ticket(customerID, ticketDate, totalCost):
+def db_create_ticket(customerID, ticketDate):
     sql = """
-        INSERT INTO ticket (customerID, ticketDate, totalCost)
-        VALUES (%s, %s, %s)
+        INSERT INTO ticket (customerID, ticketDate)
+        VALUES (%s, %s)
     """
 
-    return db.execute_return_lastrowid(sql, [customerID, ticketDate, totalCost])
+    return db.execute_return_lastrowid(sql, [customerID, ticketDate])
 
 def create_ticket_trip(ticketID, tripID, tripCost):
     sql = """

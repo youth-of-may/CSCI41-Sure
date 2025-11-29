@@ -20,31 +20,30 @@ def booking_page(request):
     })
     
 def booking_add(request, tripID):
-    """
-    Add or remove a trip to a potential ticket
-    """
-    
     customer_id = request.session.get("customer_id")
     if not customer_id:
         return redirect("login")
-    
+
     customer = get_full_customer(customer_id)
     sessionTrips = request.session.get('selected_trips', [])
-    
+
+    # Add/remove trip selection
     if tripID not in sessionTrips:
         sessionTrips.append(tripID)
-        request.session['selected_trips'] = sessionTrips
     else:
         sessionTrips.remove(tripID)
-        request.session['selected_trips'] = sessionTrips
-    
-    # If removed all trips from session go back to booking
+
+    request.session['selected_trips'] = sessionTrips
+
+    # If no trips left, go back
     if not sessionTrips:
         return redirect("booking_page")
-    
+
     trips = get_trips(sessionTrips)
+
+    # TOTAL COST = sum of baseCost values from route
     totalCost = sum(t['baseCost'] for t in trips)
-    print(sessionTrips)
+
     context = {
         "customer": customer[0],
         "trips": trips,
@@ -52,28 +51,29 @@ def booking_add(request, tripID):
         "date": date.today(),
         "totalCost": totalCost,
     }
-    
+
     return render(request, "trainapp/booking/ticket_preview.html", context)
 
+
 def create_ticket(request):
-    """
-    Creates new ticket, ticketTrips and then shows the final ticket
-    Clears tripIDs from session
-    """
     customer_id = request.session.get("customer_id")
     if not customer_id:
         return redirect("login")
-    
-    # Get all necessary data to make the final ticket and trips
+
     sessionTrips = request.session.get('selected_trips', [])
     trips = get_trips(sessionTrips)
+
+    # Compute total cost dynamically
     totalCost = sum(t['baseCost'] for t in trips)
-    
-    ticketID = db_create_ticket(customer_id, date.today(), totalCost)
-    # Create all the individual trips
-    for x in range(len(trips)):
-        create_ticket_trip(ticketID, sessionTrips[x], trips[x]["baseCost"])
-    
-    # Clear session cookies then redirect
+
+    # Create ticket (ticket table has no totalCost column)
+    ticketID = db_create_ticket(customer_id, date.today())
+
+    # Create each ticketTrip entry
+    for i, trip in enumerate(trips):
+        create_ticket_trip(ticketID, sessionTrips[i], trip["baseCost"])
+
+    # Clear session
     del request.session['selected_trips']
+
     return redirect("ticket_trips", pk=ticketID)
