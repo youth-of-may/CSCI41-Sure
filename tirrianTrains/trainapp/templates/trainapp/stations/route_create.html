@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add New Route
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#5A698E] flex h-28 items-center justify-center px-4 m-2">
+    <h1 class="text-3xl text-white font-bold text-center">New Route Registration</h1>
+</div>
+
+<div class="scale-100 max-w-7xl mx-auto p-6 space-y-8">
+    <div class="w-full p-2 mb-4 border bg-gray-200 rounded text-center justify-center">
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <div class="flex flex-col items-start">
+                <label for="originID" class="mb-2 font-medium">Origin Station</label>
+                <select id="originID" name="originID" class="w-full p-2 bg-gray-300 rounded" required>
+                    <option value="">Select</option>
+                    {% for s in stations %}
+                        <option value="{{ s.stationID }}">{{ s.stationName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex flex-col items-start">
+                <label for="destID" class="mb-2 font-medium">Destination Station</label>
+                <select id="destID" name="destID" class="w-full p-2 bg-gray-300 rounded" required>
+                    <option value="">Select</option>
+                    {% for s in stations %}
+                        <option value="{{ s.stationID }}">{{ s.stationName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="flex flex-col items-start">
+                <label for="baseCost" class="mb-2 font-medium">Base Cost (₱)</label>
+                <input 
+                    type="number" 
+                    id="baseCost" 
+                    name="baseCost" 
+                    class="w-full p-2 bg-gray-300 rounded"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+            </div>
+
+            <div class="flex flex-col items-start">
+                <label for="isLocalRoute" class="mb-2 font-medium">Route Type</label>
+                <select id="isLocalRoute" name="isLocalRoute" class="w-full p-2 bg-gray-300 rounded" required>
+                    <option value="">Select Route Type</option>
+                    <option value="1">Local</option>
+                    <option value="0">Intertown</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col items-start">
+                <label for="estDuration" class="mb-2 font-medium">Estimated Duration (minutes)</label>
+                <input 
+                    type="number" 
+                    id="estDuration" 
+                    name="estDuration" 
+                    class="w-full p-2 bg-gray-300 rounded"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <button 
+                type="submit" 
+                class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+                Create Route
+            </button>
+
+        </form>
+
+    </div>
+</div>
+{% endblock %}

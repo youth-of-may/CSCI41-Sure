@@ -3,6 +3,7 @@ from trainapp.services.station_sql import *
 from trainapp.services.route_sql import *
 from trainapp.services.price_history_sql import *
 from django.http import HttpResponse
+from django.contrib import messages
 
 
 def stations_list(request):
@@ -25,6 +26,28 @@ def stations_add(request):
         return redirect('station_list')
         
     return render(request,"trainapp/stations/station_create.html")
+
+def routes_add(request):
+    context = {
+        'stations': list_stations()
+    }
+    if request.method == "POST":
+        originID = request.POST.get("originID")
+        destID = request.POST.get("destID")
+        baseCost = request.POST.get("baseCost")
+        isLocalRoute = request.POST.get("isLocalRoute")
+        estDuration = request.POST.get("estDuration")
+        if originID == destID:
+            messages.error(request, "Origin and destination cannot be the same station.")
+            return redirect("route_create")
+
+        try:
+            add_route(originID, destID, baseCost, isLocalRoute, estDuration)
+            return redirect("station_detail", destinationID=destID) 
+        except Exception as e:
+            messages.error(request, f"Database error: {str(e)}")
+            return redirect("route_create")
+    return render(request, "trainapp/stations/route_create.html", context)
 
 
 def route_price_history(request, routeID):

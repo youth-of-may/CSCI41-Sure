@@ -38,6 +38,16 @@ def get_destination_routes(destID):
     ;"""
     return db.execute(sql, [destID])
 
+def add_route(originID, destID, baseCost, isLocalRoute, estDuration):
+    """
+    Function used to create a new route
+    """
+    sql = '''
+    INSERT INTO route(originStationID, destinationStationID, baseCost, isLocalRoute, estimatedDuration)
+    VALUES (%s, %s, %s, %s, %s);
+    '''
+    return db.execute_return_lastrowid(sql, [originID, destID, baseCost, isLocalRoute, estDuration])
+
 def get_route_info(routeID):
     sql = '''
         SELECT r.routeID,

@@ -21,6 +21,7 @@ urlpatterns = [
     path('trips/<str:trip_date>/details', schedule_detail, name="schedule_detail"),
     path('stations/', stations_list, name="station_list"),
     path('stations/add', stations_add, name="station_create"),
+    path('routes/add', routes_add, name="route_create"),
     path('stations/<int:destinationID>/details', station_detail, name="station_detail"),
     path('routes/<int:routeID>/price_history', route_price_history, name="route_price_history"),
     path('routes/<int:routeID>/price_change', change_route_price, name="change_route_price"),
