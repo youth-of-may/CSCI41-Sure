@@ -39,11 +39,14 @@ def list_sales_per_date(ticket_date=None):
     Retrieves sales given a date
     Returns: ticket #, Customer Name, Total Cost
     """
-    sql = """SELECT ticket.ticketID, CONCAT(c.givenName, ' ', COALESCE(CONCAT(c.middleInitial, '. '), ''), ' ', c.lastName) AS Customer, ticket.totalCost 
+    sql = """SELECT ticket.ticketID, CONCAT(c.givenName, ' ', COALESCE(CONCAT(c.middleInitial, '. '), ''), ' ', c.lastName) AS Customer, SUM(tp.tripCost) AS totalCost
     FROM ticket
     JOIN customer c 
     ON ticket.customerID = c.customerID
+    JOIN tickettrip tp
+    ON tp.ticketID = ticket.ticketID
     WHERE ticket.ticketDate = %s
+    GROUP BY ticket.ticketID, Customer
     ;"""
     return db.execute(sql, [ticket_date])
 
@@ -57,12 +60,13 @@ def ticketDetails(ticket_id=None):
         tr.trainID AS train_number,
         origin.stationName AS origin,
         dest.stationName AS destination,
+        st.tripDate AS tripdate,
         st.departureTime AS departure,
         st.arrivalTime AS arrival,
-        COALESCE(st.actualDuration, r.estimatedDuration) AS duration,
+        COALESCE(r.estimatedDuration,TIMESTAMPDIFF(MINUTE, st.departureTime, st.arrivalTime)) AS duration,
         tt.tripCost AS cost,
-        t.totalCost AS total,
-        t.ticketDate AS date
+        t.ticketDate AS date,
+        (SELECT SUM(tripCost) FROM ticketTrip WHERE ticketID = t.ticketID) AS totalCost
     FROM ticketTrip tt
     JOIN scheduledTrip st ON tt.tripScheduleID = st.tripScheduleID
     JOIN ticket t ON t.ticketID = tt.ticketID
@@ -93,8 +97,23 @@ def ticketCustDetails(ticket_id=None):
     c.middleInitial, c.birthDate, c.gender
     FROM customer c 
     JOIN ticket t
-    ON c.customerID = t.ticketID
+    ON c.customerID = t.customerID
     WHERE t.ticketID = %s;
     """
     results = db.execute(sql, [ticket_id])
     return results[0]
+
+def db_create_ticket(customerID, ticketDate):
+    sql = """
+        INSERT INTO ticket (customerID, ticketDate)
+        VALUES (%s, %s)
+    """
+
+    return db.execute_return_lastrowid(sql, [customerID, ticketDate])
+
+def create_ticket_trip(ticketID, tripID, tripCost):
+    sql = """
+        INSERT INTO ticketTrip (ticketID, tripScheduleID, tripCost)
+        VALUES (%s, %s, %s)
+    """
+    return db.execute(sql, [ticketID, tripID, tripCost])

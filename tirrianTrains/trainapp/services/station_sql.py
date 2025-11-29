@@ -13,23 +13,37 @@ CREATE TABLE station (
 
 def list_stations(local_only=None):
     """
-    Retrieve all stations. Can be calibrated to get stations part of local/intertown routes.
+    Retrieve all stations. Can be filtered to get stations part of local/intertown routes.
     """
     if local_only is None:
-        return db.execute('SELECT * FROM station ORDER BY stationID;')
-    return db.execute('SELECT * FROM station WHERE isLocalStation=%s', [1 if local_only else 0])
+        # Return all stations
+        return db.execute("""
+            SELECT stationID, stationName 
+            FROM station 
+            ORDER BY stationID
+        """)
+
+    # Return stations serving specific route type (with DISTINCT to avoid duplicates)
+    sql = """
+        SELECT DISTINCT s.stationID, s.stationName
+        FROM station s
+        JOIN route r ON s.stationID IN (r.originStationID, r.destinationStationID)
+        WHERE r.isLocalRoute = %s
+        ORDER BY s.stationID
+    """
+    return db.execute(sql, [1 if local_only else 0])
 
 def get_station_name(stationID=None):
     """Get a specific station name"""
     result = db.execute('SELECT stationName FROM station WHERE stationID=%s', [stationID])
     return result[0] if result else None
 
-def create_station(stationName, isLocal):
+def create_station(stationName):
     """
     Function used to create a new station
     """
     sql = '''
-    INSERT INTO station(stationName, isLocalStation)
-    VALUES (%s, %s);
+    INSERT INTO station(stationName)
+    VALUES (%s);
     '''
-    return db.execute_return_lastrowid(sql, [stationName, isLocal])
+    return db.execute_return_lastrowid(sql, [stationName])

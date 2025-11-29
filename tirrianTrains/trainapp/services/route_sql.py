@@ -38,6 +38,31 @@ def get_destination_routes(destID):
     ;"""
     return db.execute(sql, [destID])
 
+def filter_destination_routes(destID, routeType):
+    """
+    Retrieve all the routes leading to a destination station using destID
+    """
+    sql = """SELECT r.routeID, s1.stationName AS origin, s2.stationName AS destination, 
+    IF(r.isLocalRoute = 1, 'Local', 'Intertown') AS routeType, estimatedDuration 
+    FROM route r 
+    JOIN station s1 
+    ON s1.stationID = r.originStationID
+    JOIN station s2 
+    ON s2.stationID = r.destinationStationID
+    WHERE r.destinationStationID=%s AND r.isLocalRoute=%s
+    ;"""
+    return db.execute(sql, [destID, routeType])
+
+def add_route(originID, destID, baseCost, isLocalRoute, estDuration):
+    """
+    Function used to create a new route
+    """
+    sql = '''
+    INSERT INTO route(originStationID, destinationStationID, baseCost, isLocalRoute, estimatedDuration)
+    VALUES (%s, %s, %s, %s, %s);
+    '''
+    return db.execute_return_lastrowid(sql, [originID, destID, baseCost, isLocalRoute, estDuration])
+
 def get_route_info(routeID):
     sql = '''
         SELECT r.routeID,

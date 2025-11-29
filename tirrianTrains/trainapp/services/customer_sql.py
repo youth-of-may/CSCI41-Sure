@@ -20,33 +20,58 @@ CREATE TABLE ticket (
 """
 
 #execute a create function for the customer 
-def create_customer(lastName, givenName, middleInitial, birthDate, gender):
+def create_customer(lastName, givenName, middleInitial, birthDate, gender, email):
     """
     Function used to create a new customer
     """
     sql = '''
-    INSERT INTO customer(lastName, givenName, middleInitial, birthDate, gender)
-    VALUES (%s, %s, %s, %s, %s);
+    INSERT INTO customer(lastName, givenName, middleInitial, birthDate, gender, email)
+    VALUES (%s, %s, %s, %s, %s, %s);
     '''
-    return db.execute_return_lastrowid(sql, [lastName, givenName, middleInitial, birthDate, gender])
+    return db.execute_return_lastrowid(sql, [lastName, givenName, middleInitial, birthDate, gender, email])
 
 def get_customer(customerID=1):
     """
     Retrieves a customer given a customerID
     Returns all columns of customer
     """
-    result = db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer WHERE customerID=%s;", [customerID])
+    result = db.execute("SELECT customerID, CONCAT(givenName, ' ', COALESCE(CONCAT(middleInitial, '. '), ''), lastName) AS name, birthDate, gender FROM customer WHERE customerID=%s;", [customerID])
     return result[0]
+
+def get_full_customer(customerID):
+    sql = "SELECT * FROM customer WHERE customerID = %s"
+    return db.execute(sql, [customerID])
+
+def query_customer(email):
+    """
+    Queries a customer based on their email isntead of the customerID
+    """
+    customer = db.execute("SELECT * FROM customer WHERE email = %s;", [email])
+    if customer:
+        return customer[0]
+    else:
+        return None
+
 def list_customers():
     """
     Retrieves the list of customers
     """
-    return db.execute("SELECT customerID, CONCAT(givenName, ' ', middleInitial, '. ', lastName) AS name, birthDate, gender FROM customer ORDER BY customerID;", [])
+    return db.execute("SELECT customerID, CONCAT(givenName, ' ', COALESCE(CONCAT(middleInitial, '. '), ''), lastName) AS name, birthDate, gender FROM customer ORDER BY customerID;", [])
 
 def generate_travel_history(customerID=1):
     """
-    Retrieves travel history of a customer given a customerID
-    Returns only one valeu: total cost
+    Retrieves all tickets of a customer.
+    Computes totalCost from ticketTrip.
     """
-    sql = "SELECT ticketID, ticketDate, totalCost FROM ticket WHERE customerID = %s;"
+    sql = """
+    SELECT 
+        t.ticketID,
+        t.ticketDate,
+        COALESCE(SUM(tt.tripCost), 0) AS totalCost
+    FROM ticket t
+    LEFT JOIN ticketTrip tt ON t.ticketID = tt.ticketID
+    WHERE t.customerID = %s
+    GROUP BY t.ticketID, t.ticketDate
+    ORDER BY t.ticketID;
+    """
     return db.execute(sql, [customerID])
