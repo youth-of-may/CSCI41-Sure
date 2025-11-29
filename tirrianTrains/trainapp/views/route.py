@@ -21,7 +21,7 @@ def station_detail(request, destinationID):
 
 def stations_add(request):
     if request.method == 'POST':
-        create_station(request.POST['stationName'], request.POST['isLocalStation'])
+        create_station(request.POST['stationName'])
         return redirect('station_list')
         
     return render(request,"trainapp/stations/station_create.html")

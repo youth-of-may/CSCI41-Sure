@@ -1,6 +1,7 @@
 import trainapp._db as db
 
 """
+outdated schema: 
 table schema guide:
 
 CREATE TABLE station (
@@ -37,36 +38,19 @@ CREATE TABLE scheduledTrip (
 
 def list_local_trips():
     """
-    Returns all local_trips in the database
+    Returns all local trips in the database
+    (i.e., routes where isLocalRoute = 1)
     """
     
     sql = '''
     SELECT 
-        s.tripScheduleID, s.tripDate, so.stationName AS originStation, sd.stationName AS destinationStation,
-        s.departureTime, s.arrivalTime, r.baseCost FROM scheduledTrip AS s
-    JOIN route AS r 
-        ON s.routeID = r.routeID
-    JOIN station AS so 
-        ON r.originStationID = so.stationID
-    JOIN station AS sd 
-        ON r.destinationStationID = sd.stationID
-    WHERE 
-        so.isLocalStation = 1
-        AND sd.isLocalStation = 1
-    ORDER BY s.tripDate;
-    '''
-    
-    return db.execute(sql)
-
-def list_intertown_trips():
-    """
-    Returns all inter-town trips in the database
-    (i.e., at least one station is not a local station)
-    """
-    sql = '''
-    SELECT 
-        s.tripScheduleID, s.tripDate, so.stationName AS originStation, sd.stationName AS destinationStation,
-        s.departureTime, s.arrivalTime, r.baseCost
+        s.tripScheduleID,
+        s.tripDate,
+        so.stationName AS originStation,
+        sd.stationName AS destinationStation,
+        s.departureTime,
+        s.arrivalTime,
+        r.baseCost
     FROM scheduledTrip AS s
     JOIN route AS r 
         ON s.routeID = r.routeID
@@ -74,13 +58,42 @@ def list_intertown_trips():
         ON r.originStationID = so.stationID
     JOIN station AS sd 
         ON r.destinationStationID = sd.stationID
-    WHERE 
-        so.isLocalStation = 0
-        OR sd.isLocalStation = 0
+    WHERE r.isLocalRoute = 1
+    ORDER BY s.tripDate;
+    '''
+    
+    return db.execute(sql)
+
+
+
+def list_intertown_trips():
+    """
+    Returns all inter-town trips in the database
+    (i.e., routes where isLocalRoute = 0)
+    """
+
+    sql = '''
+    SELECT 
+        s.tripScheduleID,
+        s.tripDate,
+        so.stationName AS originStation,
+        sd.stationName AS destinationStation,
+        s.departureTime,
+        s.arrivalTime,
+        r.baseCost
+    FROM scheduledTrip AS s
+    JOIN route AS r 
+        ON s.routeID = r.routeID
+    JOIN station AS so 
+        ON r.originStationID = so.stationID
+    JOIN station AS sd 
+        ON r.destinationStationID = sd.stationID
+    WHERE r.isLocalRoute = 0
     ORDER BY s.tripDate;
     '''
 
     return db.execute(sql)
+
 
 def get_trips(tripIDs):
     if not tripIDs:
@@ -92,7 +105,7 @@ def get_trips(tripIDs):
     sql = f'''
     SELECT 
         s.trainID, so.stationName AS originStation, sd.stationName AS destinationStation,
-        s.departureTime, s.arrivalTime, s.actualDuration, r.baseCost
+        s.departureTime, s.arrivalTime, COALESCE(r.estimatedDuration,TIMESTAMPDIFF(MINUTE, s.departureTime, s.arrivalTime)) AS actualDuration, r.baseCost
     FROM scheduledTrip AS s
     JOIN route AS r 
         ON s.routeID = r.routeID

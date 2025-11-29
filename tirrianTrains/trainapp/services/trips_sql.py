@@ -56,7 +56,7 @@ def list_local_intertown(isLocal=True, trip_date=None):
     """
     sql = '''
     SELECT trip.trainID AS 'trainID', s1.stationName AS 'Origin', s2.stationName AS 'Destination', 
-    trip.departureTime 'Departure', trip.arrivalTime 'Arrival', trip.actualDuration, r.baseCost
+    trip.departureTime 'Departure', trip.arrivalTime 'Arrival', COALESCE(r.estimatedDuration,TIMESTAMPDIFF(MINUTE, trip.departureTime, trip.arrivalTime)) AS actualDuration, r.baseCost
     FROM route r 
     JOIN scheduledTrip trip
     ON trip.routeID = r.routeID
