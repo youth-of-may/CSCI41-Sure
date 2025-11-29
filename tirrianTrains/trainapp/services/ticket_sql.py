@@ -60,6 +60,7 @@ def ticketDetails(ticket_id=None):
         tr.trainID AS train_number,
         origin.stationName AS origin,
         dest.stationName AS destination,
+        st.tripDate AS tripdate,
         st.departureTime AS departure,
         st.arrivalTime AS arrival,
         COALESCE(r.estimatedDuration,TIMESTAMPDIFF(MINUTE, st.departureTime, st.arrivalTime)) AS duration,
