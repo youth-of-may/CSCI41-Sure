@@ -2,11 +2,6 @@ from django.shortcuts import render, redirect
 from trainapp.services.maintenance_sql import *
 
 
-def get_trains(request):
-    context = {
-        'train': list_trains()
-    }
-    return render(request, "trainapp/admin_view.html", context)
 
 def get_maintenance_history(request, pk):
     context = {
