@@ -60,8 +60,18 @@ def list_customers():
 
 def generate_travel_history(customerID=1):
     """
-    Retrieves travel history of a customer given a customerID
-    Returns only one valeu: total cost
+    Retrieves all tickets of a customer.
+    Computes totalCost from ticketTrip.
     """
-    sql = "SELECT ticketID, ticketDate, totalCost FROM ticket WHERE customerID = %s;"
+    sql = """
+    SELECT 
+        t.ticketID,
+        t.ticketDate,
+        COALESCE(SUM(tt.tripCost), 0) AS totalCost
+    FROM ticket t
+    LEFT JOIN ticketTrip tt ON t.ticketID = tt.ticketID
+    WHERE t.customerID = %s
+    GROUP BY t.ticketID, t.ticketDate
+    ORDER BY t.ticketID;
+    """
     return db.execute(sql, [customerID])
