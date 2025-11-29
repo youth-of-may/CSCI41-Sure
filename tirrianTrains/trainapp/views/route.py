@@ -13,10 +13,15 @@ def stations_list(request):
     }
     return render(request, "trainapp/stations/station_list.html", context)
 
-def station_detail(request, destinationID):
+def station_detail(request, destinationID, routeType):
+    if routeType == ("local"):
+        routeParameter = 1
+    else:
+        routeParameter = 0
+    
     context = {
         'station_name': get_station_name(destinationID),
-        'routes': get_destination_routes(destinationID),
+        'routes': filter_destination_routes(destinationID, routeParameter)
     }
     return render(request, "trainapp/stations/station_detail.html", context)
 

@@ -18,7 +18,7 @@ Stations
         {% for l in local_station %}
             <li class="divide-x divide-[#EFECE3] grid grid-cols-2 items-center px-4 py-3 text-center">
             {{l.stationName}}
-            <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' l.stationID %}">
+            <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' l.stationID 'local' %}">
                 View Routes
             </a>    
             </li>
@@ -34,7 +34,7 @@ Stations
         {% for i in intertown_station %}
             <li class="divide-x divide-[#EFECE3] grid grid-cols-2 items-center px-4 py-3 text-center">
             {{i.stationName}}
-            <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' i.stationID %}">
+            <a class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600" href="{% url 'station_detail' i.stationID 'intertown' %}">
                 View Routes
             </a>    
             </li>
