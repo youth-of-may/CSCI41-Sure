@@ -12,7 +12,7 @@ def stations_list(request):
     }
     return render(request, "trainapp/stations/station_list.html", context)
 
-def station_detail(request, destinationID):
+def station_detail(request, destinationID, routeType):
     context = {
         'station_name': get_station_name(destinationID),
         'routes': get_destination_routes(destinationID),
