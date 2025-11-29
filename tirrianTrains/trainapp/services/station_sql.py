@@ -38,7 +38,7 @@ def get_station_name(stationID=None):
     result = db.execute('SELECT stationName FROM station WHERE stationID=%s', [stationID])
     return result[0] if result else None
 
-def create_station(stationName, isLocal):
+def create_station(stationName):
     """
     Function used to create a new station
     """
